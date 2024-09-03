@@ -15,15 +15,15 @@ namespace CampusConnect.Services
             }
 
             //Verifica se as role existem
-            var existe = await roleManager.RoleExistsAsync("admin");
-            if (!existe)
+            var exists = await roleManager.RoleExistsAsync("admin");
+            if (!exists)
             {
                 Console.WriteLine("A role admin não existe e está sendo criada");
                 await roleManager.CreateAsync(new IdentityRole("admin"));
             }
 
-            existe = await roleManager.RoleExistsAsync("aluno");
-            if (!existe)
+            exists = await roleManager.RoleExistsAsync("aluno");
+            if (!exists)
             {
                 Console.WriteLine("A role aluno não existe e está sendo criada");
                 await roleManager.CreateAsync(new IdentityRole("aluno"));
@@ -37,16 +37,16 @@ namespace CampusConnect.Services
                 Email = "TheAdmin@admin.com",
             };
 
-            string senhaInicial = "O@dmin40028922";
+            string initialPassword = "O@dmin40028922";
 
-            var resultado = await userManager.CreateAsync(user, senhaInicial);
+            var result = await userManager.CreateAsync(user, initialPassword);
 
-            if (resultado.Succeeded)
+            if (result.Succeeded)
             {
                 await userManager.AddToRoleAsync(user, "admin");
                 Console.WriteLine("Usuário administrador criado com sucesso!");
                 Console.WriteLine("Email: " + user.Email);
-                Console.WriteLine("Senha inicial: " + senhaInicial);
+                Console.WriteLine("Senha inicial: " + initialPassword);
             }
         }
     }

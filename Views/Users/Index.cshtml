@@ -1,0 +1,36 @@
+﻿﻿@using Microsoft.AspNetCore.Identity
+@model List<ApplicationUser>
+@inject UserManager<ApplicationUser> UserManager
+@{
+}
+
+<table class="table table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Instituição</th>
+            <th>Cidade</th>
+            <th>Curso</th>
+            <th>Telefone</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@(user.Nome + " " + user.Sobrenome)</td>
+                <td>@user.Instituicao</td>
+                <td>@user.Cidade</td>
+                <td>@user.Curso</td>
+                <td>@user.PhoneNumber</td>
+                <td>@user.Email</td>
+            </tr>
+        }       
+    </tbody>
+</table>
+
+
+
+
+

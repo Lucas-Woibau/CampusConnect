@@ -1,0 +1,221 @@
+﻿using CampusConnect.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+
+namespace CampusConnect.Controllers
+{
+    public class AccountController : Controller
+    {
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IConfiguration _configuration;
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration)
+        {
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _configuration = configuration;
+        }
+
+        public IActionResult Register()
+        {
+            if (_signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterDto registerDto)
+        {
+            if (_signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (!ModelState.IsValid)
+            {
+                return View(registerDto);
+            }
+            var user = new ApplicationUser()
+            {
+                Nome = registerDto.Nome,
+                Sobrenome = registerDto.Sobrenome,
+                UserName = registerDto.Email,
+                Email = registerDto.Email,
+                PhoneNumber = registerDto.Telefone,
+                Cidade = registerDto.Cidade,
+                Instituicao = registerDto.Instituicao,
+                Curso = registerDto.Curso,
+                Matricula = registerDto.Matricula,
+                Periodo = registerDto.Periodo,
+            };
+
+            var result = await _userManager.CreateAsync(user, registerDto.Senha);
+
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, "aluno");
+                await _signInManager.SignInAsync(user, false);
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error.Description);
+            }
+
+            return View(registerDto);
+        }
+
+        public IActionResult Login()
+        {
+            if (_signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginDto loginDto)
+        {
+            if(_signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (!ModelState.IsValid)
+            {
+                return View(loginDto);
+            }
+
+            var result = await _signInManager.PasswordSignInAsync(loginDto.Email, loginDto.Senha,
+                loginDto.LembrarDeMim, false);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "Tentativa de login inválida.";
+            }
+
+            return View(loginDto);
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            if (_signInManager.IsSignedIn(User))
+            {
+                await _signInManager.SignOutAsync();
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Profile()
+        {
+            var appUser = await _userManager.GetUserAsync(User);
+            if (appUser == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var profileDto = new ProfileDto()
+            {
+                Nome = appUser.Nome,
+                Sobrenome = appUser.Sobrenome,
+                Email = appUser.Email ?? "",
+                Telefone = appUser.PhoneNumber ?? "",
+                Cidade = appUser.Cidade,
+                Instituicao = appUser.Instituicao,
+                Curso = appUser.Curso,
+                Matricula = appUser.Matricula,
+                Periodo = appUser.Periodo,
+            };
+
+            return View(profileDto);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Profile(ProfileDto profileDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.ErrorMessage = "Por favor preencha todos os campos";
+                return View(profileDto);
+            }
+
+            var appUser = await _userManager.GetUserAsync(User);
+
+            if (appUser == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            appUser.Nome = profileDto.Nome;
+            appUser.Sobrenome = profileDto.Sobrenome;
+            appUser.UserName = profileDto.Email;
+            appUser.Email = profileDto.Email;
+            appUser.PhoneNumber = profileDto.Telefone;
+            appUser.Cidade = profileDto.Cidade;
+            appUser.Instituicao = profileDto.Instituicao;
+            appUser.Curso = profileDto.Curso;
+            appUser.Matricula = profileDto.Matricula;
+
+            var result = await _userManager.UpdateAsync(appUser);
+
+            if (result.Succeeded)
+            {
+                ViewBag.SuccessMessage = "Perfil atualizado com sucesso";
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "Não foi possível atualizar o perfil:" + result.Errors.First().Description;
+            }
+
+            return View(profileDto);
+        }
+
+        [Authorize]
+        public IActionResult Password()
+        {
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Password(PasswordDto passwordDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            var appUser = await _userManager.GetUserAsync(User);
+            if (appUser == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var result = await _userManager.ChangePasswordAsync(appUser,
+                passwordDto.SenhaAtual, passwordDto.NovaSenha);
+
+            if (result.Succeeded)
+            {
+                ViewBag.SuccessMessage = "Senha atualizada com sucesso";
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "Não foi possível atualizar a senha:" + result.Errors.First().Description;
+            }
+
+            return View();
+        }
+    }
+}
