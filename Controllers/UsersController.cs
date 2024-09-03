@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CampusConnect.Controllers
 {
-    //[Authorize(Roles = "admin")]
-    //[Route("/Admin/[controller]/{action}/{id}")]
+    [Authorize(Roles = "admin")]
+    [Route("/Admin/[controller]/{action=Index}/{id?}")]
     public class UsersController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

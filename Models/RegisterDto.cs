@@ -22,7 +22,6 @@ namespace CampusConnect.Models
         [Required, MaxLength(100)]
         public string Instituicao { get; set; } = "";
 
-        [Required, MaxLength(100)]
         public string Matricula { get; set; } = "";
 
         [Required, MaxLength(100)]

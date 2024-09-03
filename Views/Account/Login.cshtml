@@ -1,0 +1,56 @@
+﻿@model LoginDto
+@{
+}
+
+<div class="row">
+    <div class="col-md-4 mx-auto rounded border p-4">
+        <h2 class="text-center mb-3">Please Log In</h2>
+        <br />
+
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>@ViewBag.ErrorMessage</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        <form method="post">
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Senha</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="password" asp-for="Senha">
+                    <span asp-validation-for="Senha" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" asp-for="LembrarDeMim" />
+                <label class="form-check-label">Manter conectado</label>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col d-grid">
+                    <button type="submit" class="btn btn-primary">Log in</button>
+                </div>
+                <div class="col d-grid">
+                    <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Index" role="button">
+                        Cancel
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <a class="btn btn-link" asp-controller="Account" asp-action="ForgotPassword">
+                    Forgot your password?
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

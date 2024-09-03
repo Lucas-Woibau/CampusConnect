@@ -45,17 +45,15 @@
                                         @(appUser!.Nome + " " + appUser!.Sobrenome + "(Admin)")
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Index">Products</a></li>
-                                        <li><a class="dropdown-item" asp-area="" asp-controller="AdminOrders" asp-action="Index">Orders</a></li>
-                                        <li><a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Index">Users</a></li>
-                                        <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Profile">Profile</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Index">Alunos</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Profile">Perfil</a></li>
                                         <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Sair</a></li>
                                     </ul>
                                 </li>
                             </ul>
                         }
-                        else if (User.IsInRole("client"))
+                        else if (User.IsInRole("aluno"))
                         {
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
@@ -75,7 +73,7 @@
                         {
                             <ul class="navbar-nav">
                                 <li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Sair</a></li>
                                 </li>
                             </ul>
                         }
@@ -84,7 +82,7 @@
                     {
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="btn btn-outline-primary me-2" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                                <a class="btn btn-outline-primary me-2" asp-area="" asp-controller="Account" asp-action="Register">Registrar</a>
                             </li>
                             <li class="nav-item">
                                 <a class="btn btn-primary" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
