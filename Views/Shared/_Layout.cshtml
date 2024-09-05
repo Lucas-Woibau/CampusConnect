@@ -22,11 +22,17 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            if (User.IsInRole("admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Alunos</a>
+                                </li>
+                            }
+                        }
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Alunos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Contato</a>
                         </li>
                     </ul>
 
@@ -45,7 +51,7 @@
                                         @(appUser!.Nome + " " + appUser!.Sobrenome + "(Admin)")
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Index">Alunos</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Users" asp-action="Index">Alunos</a></li>
                                         <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Profile">Perfil</a></li>
                                         <li><hr class="dropdown-divider"></li>
                                         <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Sair</a></li>
@@ -61,20 +67,17 @@
                                         @(appUser!.Nome + " " + appUser!.Sobrenome + "(Aluno)")
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" asp-area="" asp-controller="ClientOrders" asp-action="Index">Orders</a></li>
-                                        <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Profile">Profile</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Profile">Perfil</a></li>
                                         <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Sair</a></li>
                                     </ul>
                                 </li>
                             </ul>
                         }
                         else
                         {
-                            <ul class="navbar-nav">
-                                <li>
+                            <ul class="navbar-nav">                               
                                 <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Sair</a></li>
-                                </li>
                             </ul>
                         }
                     }
@@ -85,7 +88,7 @@
                                 <a class="btn btn-outline-primary me-2" asp-area="" asp-controller="Account" asp-action="Register">Registrar</a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn btn-primary" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                                <a class="btn btn-primary" asp-area="" asp-controller="Account" asp-action="Login">Entrar</a>
                             </li>
                         </ul>
                     }
@@ -101,7 +104,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - CampusConnect - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - CampusConnect - <a asp-area="" asp-controller="Home" asp-action="Privacy">Contato</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

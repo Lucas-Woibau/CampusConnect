@@ -1,0 +1,182 @@
+﻿@model ProfileDto
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@{
+    var appUser = await UserManager.GetUserAsync(User);
+
+    string userRole = "";
+    if (User.IsInRole("admin")) userRole = "Admin";
+    if (User.IsInRole("aluno")) userRole = "Aluno";
+}
+
+<div>
+    <div class="col-md-8 mx-auto rounded border p-4">
+        <h2 class="mb-3">Perfil</h2>
+        <hr />
+
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                <strong>@ViewBag.ErrorMessage</strong>
+                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+            </div>
+        }
+        else if (ViewBag.SuccessMessage != null)
+        {
+            <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                <strong>@ViewBag.SuccessMessage</strong>
+                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+            </div>
+        }
+
+
+        <div class="row mb-2">
+            <div class="col-sm-4">First Name</div>
+            <div class="col-sm-8">@appUser?.Nome</div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-sm-4">Last Name</div>
+            <div class="col-sm-8">@appUser?.Sobrenome</div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-sm-4">Telefone</div>
+            <div class="col-sm-8">@appUser?.PhoneNumber</div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-sm-4">Cidade</div>
+            <div class="col-sm-8">@appUser?.Cidade</div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-sm-4">Instituição</div>
+            <div class="col-sm-8">@appUser?.Instituicao</div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-sm-4">Curso</div>
+            <div class="col-sm-8">@appUser?.Curso</div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-sm-4">Matricula</div>
+            <div class="col-sm-8">@appUser?.Matricula</div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-sm-4">Periodo</div>
+            <div class="col-sm-8">@appUser?.Periodo</div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-sm-4">Email</div>
+            <div class="col-sm-8">@appUser?.Email</div>
+        </div>
+
+        <hr />
+
+        <div>
+            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editProfileModal">Alterar perfil</button>
+            <a class="btn btn-warning btn-sm" asp-controller="Account" asp-action="Password">Alterar senha</a>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editProfileModalLabel">Editar Perfil</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="EditProfile" method="post">
+                    <div class="row mb-2">
+                        <label for="Nome" class="col-sm-4 col-form-label">First Name*</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="Nome" asp-for="Nome" />
+                            <span asp-validation-for="Nome" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <label for="Sobrenome" class="col-sm-4 col-form-label">Last Name*</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="Sobrenome" asp-for="Sobrenome" />
+                            <span asp-validation-for="Sobrenome" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <label for="Email" class="col-sm-4 col-form-label">Email*</label>
+                        <div class="col-sm-8">
+                            <input type="email" class="form-control" id="Email" asp-for="Email" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <label for="PhoneNumber" class="col-sm-4 col-form-label">Phone</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="PhoneNumber" asp-for="Telefone" />
+                            <span asp-validation-for="Telefone" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <label for="Cidade" class="col-sm-4 col-form-label">Cidade</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="Cidade" asp-for="Cidade" />
+                            <span asp-validation-for="Cidade" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <label for="Instituicao" class="col-sm-4 col-form-label">Instituição</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="Instituicao" asp-for="Instituicao" />
+                            <span asp-validation-for="Instituicao" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <label for="Curso" class="col-sm-4 col-form-label">Curso</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="Curso" asp-for="Curso" />
+                            <span asp-validation-for="Curso" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <label for="Matricula" class="col-sm-4 col-form-label">Matricula</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="Matricula" asp-for="Matricula" />
+                            <span asp-validation-for="Matricula" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <label for="Periodo" class="col-sm-4 col-form-label">Periodo</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="Periodo" asp-for="Periodo" />
+                            <span asp-validation-for="Periodo" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="offset-sm-4 col-sm-8 d-grid">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

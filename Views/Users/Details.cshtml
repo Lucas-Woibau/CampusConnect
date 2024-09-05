@@ -1,0 +1,126 @@
+﻿@model ApplicationUser
+
+@{
+}
+
+<div class="row">
+    <div class="col-lg-6  mx-auto rounded border  p-4">
+        <h2 class="text-center mb-3">Detalhes do usuário</h2>
+        <hr />
+
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                <strong>@TempData["ErrorMessage"]</strong>
+                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+            </div>
+        }
+        else if (TempData["SuccessMessage"] != null)
+        {
+            <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                <strong>@TempData["SuccessMessage"]</strong>
+                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+            </div>
+        }
+
+        <div class="row mb-2">
+            <div class="col-sm-4">Nome</div>
+            <div class="col-sm-8">@Model.Nome</div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-sm-4">Sobrenome</div>
+            <div class="col-sm-8">@Model.Sobrenome</div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-sm-4">Telefone</div>
+            <div class="col-sm-8">@Model.PhoneNumber</div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-sm-4">Cidade</div>
+            <div class="col-sm-8">@Model.Cidade</div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-sm-4">Instituição</div>
+            <div class="col-sm-8">@Model.Instituicao</div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-sm-4">Curso</div>
+            <div class="col-sm-8">@Model.Curso</div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-sm-4">Matricula</div>
+            <div class="col-sm-8">@Model.Matricula</div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-sm-4">Periodo</div>
+            <div class="col-sm-8">@Model.Periodo</div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-sm-4">Classe</div>
+            <div class="col-sm-8">
+                @{
+                    var roles = ViewBag.Roles;
+                    var rolesStr = String.Join(", ", roles);
+
+                    string color = "bg-secondary";
+                    if (roles.Contains("admin"))
+                    {
+                        color = "bg-warning text-dark";
+                    }
+                    else if (roles.Contains("aluno"))
+                    {
+                        color = "bg-success";
+                    }
+
+                    <span class="badge rounded-pill @color">@rolesStr</span>
+
+                    <button type="button" class="btn btn-link" style="text-decoration:none" data-bs-toggle="modal" data-bs-target="#roleModal">
+                        Alterar
+                    </button>
+                }
+            </div>
+        </div>
+
+        <hr />
+
+        <div>
+            <a class="btn btn-primary" asp-controller="Users" asp-action="Index">Voltar</a>
+
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                Deletar
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="roleModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Alterar classe de usuário</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="get" asp-controller="Users" asp-action="EditRole">
+                    <input type="hidden" value="@Model.Id" name="id" />
+                    <label>Selecione a classe</label>
+                    <select class="form-select mb-2" name="newRole" asp-items="@ViewBag.SelectItems">
+                    </select>
+                    <button type="submit" class="btn btn-primary">Confirmar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </form>                   
+            </div>            
+        </div>
+    </div>
+</div>
