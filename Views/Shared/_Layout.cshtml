@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br" data-bs-theme="dark">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,11 +7,12 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CampusConnect.styles.css" asp-append-version="true" />
+    <script src="https://kit.fontawesome.com/0a770bd101.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark box-shadow" style="background-color:black">
+            <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CampusConnect</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -19,21 +20,15 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
                         @if (SignInManager.IsSignedIn(User))
                         {
                             if (User.IsInRole("admin"))
                             {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Alunos</a>
+                                <li class="nav-item" style="color:white">
+                                    <a class="nav-link text-light" asp-area="" asp-controller="Users" asp-action="Index">Alunos</a>
                                 </li>
                             }
                         }
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Contato</a>
-                        </li>
                     </ul>
 
                     @using Microsoft.AspNetCore.Identity
@@ -47,8 +42,8 @@
                         {
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        @(appUser!.Nome + " " + appUser!.Sobrenome + "(Admin)")
+                                    <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        @(appUser!.Nome + "(Admin)")
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" asp-area="" asp-controller="Users" asp-action="Index">Alunos</a></li>
@@ -63,11 +58,11 @@
                         {
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        @(appUser!.Nome + " " + appUser!.Sobrenome + "(Aluno)")
+                                    <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        @(appUser!.Nome)
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Profile">Perfil</a></li>
+                                        <li><a class="dropdown-item"  asp-area="" asp-controller="Account" asp-action="Profile">Perfil</a></li>
                                         <li><hr class="dropdown-divider"></li>
                                         <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Sair</a></li>
                                     </ul>
@@ -85,10 +80,10 @@
                     {
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="btn btn-outline-primary me-2" asp-area="" asp-controller="Account" asp-action="Register">Registrar</a>
+                                <a class="btn btn-outline-light me-2" asp-area="" asp-controller="Account" asp-action="Register">Registrar</a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn btn-primary" asp-area="" asp-controller="Account" asp-action="Login">Entrar</a>
+                                <a class="btn btn-outline-light" asp-area="" asp-controller="Account" asp-action="Login">Entrar</a>
                             </li>
                         </ul>
                     }
@@ -101,12 +96,6 @@
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - CampusConnect - <a asp-area="" asp-controller="Home" asp-action="Privacy">Contato</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

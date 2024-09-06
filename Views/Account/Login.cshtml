@@ -27,26 +27,25 @@
                 <input class="form-control" type="password" asp-for="Senha">
                 <span asp-validation-for="Senha" class="text-danger"></span>
             </div>
-
+            
             <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" asp-for="LembrarDeMim" />
-                <label class="form-check-label">Manter conectado</label>
+                <input class="form-check-input" type="checkbox" id="lembrarCheck" asp-for="LembrarDeMim" />
+                <label class="form-check-label" for="lembrarCheck">Manter conectado</label>
             </div>
 
             <div class="row mb-3">
                 <div class="col d-grid">
-                    <button type="submit" class="btn btn-primary">Log in</button>
+                    <button type="submit" class="btn btn-light">Log in</button>
                 </div>
                 <div class="col d-grid">
-                    <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Index" role="button">
+                    <a class="btn btn-outline-light" asp-controller="Home" asp-action="Index" role="button">
                         Cancel
                     </a>
                 </div>
             </div>
-
             <div>
-                <a class="btn btn-link" asp-controller="Account" asp-action="ForgotPassword">
-                    Forgot your password?
+                <a class="link-light" style="text-decoration:none" asp-controller="Account" asp-action="ForgotPassword">
+                    Esqueceu a sua senha?
                 </a>
             </div>
         </form>

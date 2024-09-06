@@ -51,6 +51,11 @@
         </div>
 
         <div class="row mb-2">
+            <div class="col-sm-4">Rota</div>
+            <div class="col-sm-8">@appUser?.Rota</div>
+        </div>
+
+        <div class="row mb-2">
             <div class="col-sm-4">Instituição</div>
             <div class="col-sm-8">@appUser?.Instituicao</div>
         </div>
@@ -132,6 +137,14 @@
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="Cidade" asp-for="Cidade" />
                             <span asp-validation-for="Cidade" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <label for="Rota" class="col-sm-4 col-form-label">Rota</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="Rota" asp-for="Rota" />
+                            <span asp-validation-for="Rota" class="text-danger"></span>
                         </div>
                     </div>
 

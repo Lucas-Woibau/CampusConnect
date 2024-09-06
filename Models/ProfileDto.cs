@@ -19,6 +19,9 @@ namespace CampusConnect.Models
         [Required(ErrorMessage = "Preencha sua cidade."), MaxLength(100)]
         public string Cidade { get; set; } = "";
 
+        [Required(ErrorMessage = "Preencha sua rota."), MaxLength(100)]
+        public string Rota { get; set; } = "";
+
         [Required(ErrorMessage = "Preencha sua instituição."), MaxLength(100)]
         public string Instituicao { get; set; } = "";
 

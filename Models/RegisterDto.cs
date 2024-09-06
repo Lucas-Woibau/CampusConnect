@@ -20,6 +20,9 @@ namespace CampusConnect.Models
         public string Cidade { get; set; } = "";
 
         [Required, MaxLength(100)]
+        public string Rota { get; set; } = "";
+
+        [Required, MaxLength(100)]
         public string Instituicao { get; set; } = "";
 
         public string Matricula { get; set; } = "";

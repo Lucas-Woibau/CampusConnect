@@ -1,10 +1,19 @@
-﻿﻿@using Microsoft.AspNetCore.Identity
+﻿@using Microsoft.AspNetCore.Html
+﻿@using Microsoft.AspNetCore.Identity
 @model List<ApplicationUser>
 @inject UserManager<ApplicationUser> UserManager
+
 @{
 }
 
-<table class="table table-striped" style="width:100%">
+<h2 class="text-center mb-5">Lista de Alunos</h2>
+
+<div class="input-group flex-nowrap mb-5" style="width:25%">
+    <span class="input-group-text" id="addon-wrapping">Pesquisar</span>
+    <input class="form-control" type="search" name="search" value="" placeholder="Search by Name or Brand" aria-label="Search">
+</div>
+
+<table id="dataTable" class="table table-striped" style="width:100%">
     <thead>
         <tr>
             <th>Nome</th>
@@ -13,7 +22,7 @@
             <th>Curso</th>
             <th>Telefone</th>
             <th>Email</th>
-            <th></th>
+            <th style="width:5px"></th>
         </tr>
     </thead>
     <tbody>
@@ -28,16 +37,18 @@
                 <td>@user.Email</td>
 
                 <td>
-                    <!-- Botão Detalhes -->
-                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                            data-bs-target="#detailsModal-@user.Id">
-                        Detalhes
-                    </button>
+                    <!-- Botão Detalhes e Deletar -->
+                    <div class="d-flex">
+                        <button type="button" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal"
+                                data-bs-target="#detailsModal-@user.Id">
+                            Detalhes
+                        </button>
 
-                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                            data-bs-target="#deleteModal-@user.Id">
-                        Deletar
-                    </button>
+                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                data-bs-target="#deleteModal-@user.Id">
+                            Deletar
+                        </button>
+                    </div>
                 </td>
             </tr>
 
@@ -64,6 +75,10 @@
                             <div class="row mb-2">
                                 <div class="col-sm-4">Cidade</div>
                                 <div class="col-sm-8">@user.Cidade</div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-sm-4">Rota</div>
+                                <div class="col-sm-8">@user.Rota</div>
                             </div>
                             <div class="row mb-2">
                                 <div class="col-sm-4">Instituição</div>
@@ -117,4 +132,3 @@
         }
     </tbody>
 </table>
-

@@ -47,6 +47,7 @@ namespace CampusConnect.Controllers
                 Email = registerDto.Email,
                 PhoneNumber = registerDto.Telefone,
                 Cidade = registerDto.Cidade,
+                Rota = registerDto.Rota,
                 Instituicao = registerDto.Instituicao,
                 Curso = registerDto.Curso,
                 Matricula = registerDto.Matricula,
@@ -134,6 +135,7 @@ namespace CampusConnect.Controllers
                 Email = appUser.Email ?? "",
                 Telefone = appUser.PhoneNumber ?? "",
                 Cidade = appUser.Cidade,
+                Rota = appUser.Rota,
                 Instituicao = appUser.Instituicao,
                 Curso = appUser.Curso,
                 Matricula = appUser.Matricula,
@@ -167,6 +169,7 @@ namespace CampusConnect.Controllers
             appUser.PhoneNumber = profileDto.Telefone;
             appUser.Cidade = profileDto.Cidade;
             appUser.Instituicao = profileDto.Instituicao;
+            appUser.Rota = profileDto.Rota;
             appUser.Curso = profileDto.Curso;
             appUser.Matricula = profileDto.Matricula;
             appUser.Periodo = profileDto.Periodo;
