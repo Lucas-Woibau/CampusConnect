@@ -31,12 +31,12 @@
 
 
         <div class="row mb-2">
-            <div class="col-sm-4">First Name</div>
+            <div class="col-sm-4">Primeiro nome</div>
             <div class="col-sm-8">@appUser?.Nome</div>
         </div>
 
         <div class="row mb-2">
-            <div class="col-sm-4">Last Name</div>
+            <div class="col-sm-4">Sobrenome</div>
             <div class="col-sm-8">@appUser?.Sobrenome</div>
         </div>
 
@@ -94,9 +94,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form asp-action="EditProfile" method="post">
+                <form method="post">
                     <div class="row mb-2">
-                        <label for="Nome" class="col-sm-4 col-form-label">First Name*</label>
+                        <label for="Nome" class="col-sm-4 col-form-label">Primeiro nome</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="Nome" asp-for="Nome" />
                             <span asp-validation-for="Nome" class="text-danger"></span>
@@ -104,7 +104,7 @@
                     </div>
 
                     <div class="row mb-2">
-                        <label for="Sobrenome" class="col-sm-4 col-form-label">Last Name*</label>
+                        <label for="Sobrenome" class="col-sm-4 col-form-label">Sobrenome</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="Sobrenome" asp-for="Sobrenome" />
                             <span asp-validation-for="Sobrenome" class="text-danger"></span>
@@ -112,7 +112,7 @@
                     </div>
 
                     <div class="row mb-2">
-                        <label for="Email" class="col-sm-4 col-form-label">Email*</label>
+                        <label for="Email" class="col-sm-4 col-form-label">Email</label>
                         <div class="col-sm-8">
                             <input type="email" class="form-control" id="Email" asp-for="Email" />
                             <span asp-validation-for="Email" class="text-danger"></span>
@@ -120,7 +120,7 @@
                     </div>
 
                     <div class="row mb-2">
-                        <label for="PhoneNumber" class="col-sm-4 col-form-label">Phone</label>
+                        <label for="PhoneNumber" class="col-sm-4 col-form-label">Telefone</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="PhoneNumber" asp-for="Telefone" />
                             <span asp-validation-for="Telefone" class="text-danger"></span>
@@ -169,13 +169,13 @@
 
                     <div class="row">
                         <div class="offset-sm-4 col-sm-8 d-grid">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Alterar</button>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
             </div>
         </div>
     </div>

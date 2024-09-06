@@ -4,50 +4,40 @@
 
 <div class="row">
     <div class="col-lg-6 mx-auto rounded border p-4">
-        <h2 class="text-center mb-3">Register</h2>
+        <h2 class="text-center mb-3">Registrar</h2>
         <hr />
 
         <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
 
         <form method="post">
-            <div class="row mb-3">
-                <label class="col-sm-4 col-form-label">First Name*</label>
-                <div class="col-sm-8">
-                    <input class="form-control" asp-for="Nome">
-                    <span asp-validation-for="Nome" class="text-danger"></span>
-                </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text">Primeiro Nome</label>
+                <input class="form-control" asp-for="Nome">
+                <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
 
-            <div class="row mb-3">
-                <label class="col-sm-4 col-form-label">Sobrenome</label>
-                <div class="col-sm-8">
-                    <input class="form-control" asp-for="Sobrenome">
-                    <span asp-validation-for="Sobrenome" class="text-danger"></span>
-                </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text">Sobrenome</label>
+                <input class="form-control" asp-for="Sobrenome">
+                <span asp-validation-for="Sobrenome" class="text-danger"></span>
             </div>
 
-            <div class="row mb-3">
-                <label class="col-sm-4 col-form-label">Telefone</label>
-                <div class="col-sm-8">
-                    <input class="form-control" asp-for="Telefone">
-                    <span asp-validation-for="Telefone" class="text-danger"></span>
-                </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text">Telefone</label>
+                <input class="form-control" asp-for="Telefone">
+                <span asp-validation-for="Telefone" class="text-danger"></span>
             </div>
 
-            <div class="row mb-3">
-                <label class="col-sm-4 col-form-label">Cidade</label>
-                <div class="col-sm-8">
-                    <input class="form-control" asp-for="Cidade">
-                    <span asp-validation-for="Cidade" class="text-danger"></span>
-                </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text">Cidade</label>
+                <input class="form-control" asp-for="Cidade">
+                <span asp-validation-for="Cidade" class="text-danger"></span>
             </div>
 
-            <div class="row mb-3">
-                <label class="col-sm-4 col-form-label">Instituicao</label>
-                <div class="col-sm-8">
-                    <input class="form-control" asp-for="Instituicao">
-                    <span asp-validation-for="Instituicao" class="text-danger"></span>
-                </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text">Instituição</label>
+                <input class="form-control" asp-for="Instituicao">
+                <span asp-validation-for="Instituicao" class="text-danger"></span>
             </div>
 
             <div class="row mb-3">
@@ -59,25 +49,25 @@
             </div>
 
             <div class="row mb-3">
-                <label class="col-sm-4 col-form-label">Matricula*</label>
+                <label class="col-sm-4 col-form-label">Matrícula</label>
                 <div class="col-sm-8">
                     <input class="form-control" asp-for="Matricula">
                     <span asp-validation-for="Matricula" class="text-danger"></span>
                 </div>
             </div>
-            
+
             <div class="row mb-3">
-                <label class="col-sm-4 col-form-label">Periodo</label>
+                <label class="col-sm-4 col-form-label">Período</label>
                 <div class="col-sm-8">
                     <input class="form-control" asp-for="Periodo">
                     <span asp-validation-for="Periodo" class="text-danger"></span>
                 </div>
             </div>
-            
+
             <hr />
-            
+
             <div class="row mb-3">
-                <label class="col-sm-4 col-form-label">Email</label>
+                <label class="col-sm-4 col-form-label">Email Válido</label>
                 <div class="col-sm-8">
                     <input class="form-control" asp-for="Email">
                     <span asp-validation-for="Email" class="text-danger"></span>

@@ -41,12 +41,11 @@
                 </td>
             </tr>
 
-            <!-- Modal de Detalhes -->
             <div class="modal fade" id="detailsModal-@user.Id" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Detalhes do aluno @user.Nome @user.Sobrenome</h5>
+                            <h5 class="modal-title">Detalhes da conta: @user.Nome @user.Sobrenome</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -94,18 +93,17 @@
                 </div>
             </div>
 
-
-            <!-- Modal Delete -->
             <div class="modal fade" id="deleteModal-@user.Id" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Deletar conta de usuário</h5>
+                            <h5 class="modal-title">Deletar conta</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p>Tem certeza que deseja deletar essa conta de usuário?</p>
+                            <strong>Conta: @user.Nome @user.Sobrenome</strong>
+                            <p>Tem certeza que deseja deletar essa conta?</p>
                         </div>
                         <div class="modal-footer">
                             <a class="btn btn-danger" role="button" asp-controller="Users" asp-action="DeleteAccount" asp-route-id="@user.Id">
