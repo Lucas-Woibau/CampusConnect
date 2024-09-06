@@ -1082,7 +1082,7 @@ $.validator.addMethod( "nipPL", function( value ) {
  * Brazilian tax registration number NIS of PIS numbers have 11 digits in total: 10 numbers followed by 1 check numbers
  * that are being used for validation.
  * @copyright (c) 21/08/2018 13:14, Cleiton da Silva Mendonça
- * @author Cleiton da Silva Mendonça <cleiton.mendonca@gmail.com>
+ * @author Cleiton da Silva Mendonça <>
  * @link http://gitlab.com/csmendonca Gitlab of Cleiton da Silva Mendonça
  * @link http://github.com/csmendonca Github of Cleiton da Silva Mendonça
  */
