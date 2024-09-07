@@ -2,52 +2,62 @@
 @{
 }
 
-<div class="row">
-    <div class="col-md-4 mx-auto rounded border p-4">
-        <h2 class="text-center mb-3">Please Log In</h2>
-        <br />
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <div class="login-container my-5 p-4 card shadow-lg border border-dark">
+            <h2 class="text-center mb-3">Entrar</h2>
 
-        @if (ViewBag.ErrorMessage != null)
-        {
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>@ViewBag.ErrorMessage</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        }
-
-        <form method="post">
-            <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label class="col-sm-4 col-form-label">Senha</label>
-                <input class="form-control" type="password" asp-for="Senha">
-                <span asp-validation-for="Senha" class="text-danger"></span>
-            </div>
-            
-            <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" id="lembrarCheck" asp-for="LembrarDeMim" />
-                <label class="form-check-label" for="lembrarCheck">Manter conectado</label>
-            </div>
-
-            <div class="row mb-3">
-                <div class="col d-grid">
-                    <button type="submit" class="btn btn-light">Log in</button>
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>@ViewBag.ErrorMessage</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-                <div class="col d-grid">
-                    <a class="btn btn-outline-light" asp-controller="Home" asp-action="Index" role="button">
-                        Cancel
+            }
+
+            <form method="post">
+                <div class="mb-3">
+                    <label for="Email" class="form-label">Email</label>
+                    <input class="form-control @(ViewData.ModelState["Email"]?.Errors.Count > 0 ? "is-invalid" : "")" asp-for="Email" placeholder="Digite seu email">
+                    <div class="invalid-feedback">
+                        <span asp-validation-for="Email"></span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="Senha" class="form-label">Senha</label>
+                    <input class="form-control @(ViewData.ModelState["Senha"]?.Errors.Count > 0 ? "is-invalid" : "")" type="password" asp-for="Senha" placeholder="Digite sua senha">
+                    <div class="invalid-feedback">
+                        <span asp-validation-for="Senha"></span>
+                    </div>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="lembrarCheck" asp-for="LembrarDeMim" />
+                    <label class="form-check-label" for="lembrarCheck">Manter conectado</label>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col d-grid">
+                        <button type="submit" class="btn btn-primary">Entrar</button>
+                    </div>
+                    <div class="col d-grid">
+                        <a class="btn btn-light border" asp-controller="Home" asp-action="Index" role="button">
+                            Cancelar
+                        </a>
+                    </div>
+                </div>
+                <div class="text-left">
+                    <a class="link" asp-controller="Account" asp-action="ForgotPassword" style="text-decoration:none">
+                        Esqueceu a sua senha?
                     </a>
                 </div>
-            </div>
-            <div>
-                <a class="link-light" style="text-decoration:none" asp-controller="Account" asp-action="ForgotPassword">
-                    Esqueceu a sua senha?
-                </a>
-            </div>
-        </form>
+                <div class="col d-grid">
+                    <a class="link" asp-controller="Account" asp-action="Register" style="text-decoration:none">
+                        Não possuo uma conta!
+                    </a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

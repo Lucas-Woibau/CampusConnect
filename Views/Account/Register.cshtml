@@ -2,104 +2,160 @@
 @{
 }
 
-<div class="row">
-    <div class="col-lg-6 mx-auto rounded border p-4">
-        <h2 class="text-center mb-3">Registrar</h2>
-        <hr />
+<div class="container my-5" >
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="card shadow-lg border border-dark">
+                <div class="card-body p-5">
+                    <h2 class="text-center mb-4">Registrar</h2>
 
-        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
-        <form method="post">
-            <div class="input-group mb-3">
-                <label class="input-group-text">Primeiro Nome</label>
-                <input class="form-control" asp-for="Nome">
-                <span asp-validation-for="Nome" class="text-danger"></span>
-            </div>
+                    <form method="post">
+                        <div class="row">
+                            <!-- Primeira coluna com 6 campos -->
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="Nome" class="form-label">Primeiro Nome</label>
+                                    <input class="form-control @(ViewData.ModelState["Nome"]?.Errors.Count > 0 ? "is-invalid" : "")" asp-for="Nome" placeholder="Digite seu primeiro nome">
+                                    <div class="invalid-feedback">
+                                        <span asp-validation-for="Nome"></span>
+                                    </div>
+                                </div>
+                            </div>
 
-            <div class="input-group mb-3">
-                <label class="input-group-text">Sobrenome</label>
-                <input class="form-control" asp-for="Sobrenome">
-                <span asp-validation-for="Sobrenome" class="text-danger"></span>
-            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="Sobrenome" class="form-label">Sobrenome</label>
+                                    <input class="form-control @(ViewData.ModelState["Sobrenome"]?.Errors.Count > 0 ? "is-invalid" : "")" asp-for="Sobrenome" placeholder="Digite seu sobrenome">
+                                    <div class="invalid-feedback">
+                                        <span asp-validation-for="Sobrenome"></span>
+                                    </div>
+                                </div>
+                            </div>
 
-            <div class="input-group mb-3">
-                <label class="input-group-text">Telefone</label>
-                <input class="form-control" asp-for="Telefone">
-                <span asp-validation-for="Telefone" class="text-danger"></span>
-            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="Telefone" class="form-label">Telefone</label>
+                                    <input class="form-control @(ViewData.ModelState["Telefone"]?.Errors.Count > 0 ? "is-invalid" : "")" asp-for="Telefone" placeholder="Digite seu telefone">
+                                    <div class="invalid-feedback">
+                                        <span asp-validation-for="Telefone"></span>
+                                    </div>
+                                </div>
+                            </div>
 
-            <div class="input-group mb-3">
-                <label class="input-group-text">Cidade</label>
-                <input class="form-control" asp-for="Cidade">
-                <span asp-validation-for="Cidade" class="text-danger"></span>
-            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="Cidade" class="form-label">Cidade</label>
+                                    <input class="form-control @(ViewData.ModelState["Cidade"]?.Errors.Count > 0 ? "is-invalid" : "")" asp-for="Cidade" placeholder="Digite sua cidade">
+                                    <div class="invalid-feedback">
+                                        <span asp-validation-for="Cidade"></span>
+                                    </div>
+                                </div>
+                            </div>
 
-            <div class="input-group mb-3">
-                <label class="input-group-text">Instituição</label>
-                <input class="form-control" asp-for="Instituicao">
-                <span asp-validation-for="Instituicao" class="text-danger"></span>
-            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="Curso" class="form-label">Curso</label>
+                                    <input class="form-control @(ViewData.ModelState["Curso"]?.Errors.Count > 0 ? "is-invalid" : "")" asp-for="Curso" placeholder="Digite seu curso">
+                                    <div class="invalid-feedback">
+                                        <span asp-validation-for="Curso"></span>
+                                    </div>
+                                </div>
+                            </div>
 
-            <div class="row mb-3">
-                <label class="col-sm-4 col-form-label">Curso</label>
-                <div class="col-sm-8">
-                    <input class="form-control" asp-for="Curso">
-                    <span asp-validation-for="Curso" class="text-danger"></span>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="Matricula" class="form-label">Matrícula</label>
+                                    <input class="form-control @(ViewData.ModelState["Matricula"]?.Errors.Count > 0 ? "is-invalid" : "")" asp-for="Matricula" placeholder="Digite sua matrícula">
+                                    <div class="invalid-feedback">
+                                        <span asp-validation-for="Matricula"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- Segunda coluna com os outros 6 campos -->
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="Instituicao" class="form-label">Instituição</label>
+                                    <input class="form-control @(ViewData.ModelState["Instituicao"]?.Errors.Count > 0 ? "is-invalid" : "")" asp-for="Instituicao" placeholder="Digite sua instituição">
+                                    <div class="invalid-feedback">
+                                        <span asp-validation-for="Instituicao"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="Rota" class="form-label">Rota</label>
+                                    <select class="form-select @(ViewData.ModelState["Rota"]?.Errors.Count > 0 ? "is-invalid" : "")" asp-for="Rota">
+                                        <option value="">Selecione a rota</option>
+                                        <option value="UNESC">UNESC</option>
+                                        <option value="CASTELO BRANCO/IFES">CASTELO BRANCO/IFES</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        <span asp-validation-for="Rota"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="Periodo" class="form-label">Período</label>
+                                    <input class="form-control @(ViewData.ModelState["Periodo"]?.Errors.Count > 0 ? "is-invalid" : "")" asp-for="Periodo" placeholder="Digite seu período">
+                                    <div class="invalid-feedback">
+                                        <span asp-validation-for="Periodo"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="Email" class="form-label">Email</label>
+                                    <input class="form-control @(ViewData.ModelState["Email"]?.Errors.Count > 0 ? "is-invalid" : "")" asp-for="Email" placeholder="Digite seu email">
+                                    <div class="invalid-feedback">
+                                        <span asp-validation-for="Email"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="Senha" class="form-label">Senha</label>
+                                    <input class="form-control @(ViewData.ModelState["Senha"]?.Errors.Count > 0 ? "is-invalid" : "")" type="password" asp-for="Senha" placeholder="Digite sua senha">
+                                    <div class="invalid-feedback">
+                                        <span asp-validation-for="Senha"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="ConfirmarSenha" class="form-label">Confirmar Senha</label>
+                                    <input class="form-control @(ViewData.ModelState["ConfirmarSenha"]?.Errors.Count > 0 ? "is-invalid" : "")" type="password" asp-for="ConfirmarSenha" placeholder="Confirme sua senha">
+                                    <div class="invalid-feedback">
+                                        <span asp-validation-for="ConfirmarSenha"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botões -->
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg">Registrar</button>
+                            <a class="btn btn-light border btn-lg" asp-controller="Home" asp-action="Index" role="button">
+                                Cancelar
+                            </a>
+                        </div>
+                    </form>
                 </div>
             </div>
-
-            <div class="row mb-3">
-                <label class="col-sm-4 col-form-label">Matrícula</label>
-                <div class="col-sm-8">
-                    <input class="form-control" asp-for="Matricula">
-                    <span asp-validation-for="Matricula" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <label class="col-sm-4 col-form-label">Período</label>
-                <div class="col-sm-8">
-                    <input class="form-control" asp-for="Periodo">
-                    <span asp-validation-for="Periodo" class="text-danger"></span>
-                </div>
-            </div>
-
-            <hr />
-
-            <div class="row mb-3">
-                <label class="col-sm-4 col-form-label">Email Válido</label>
-                <div class="col-sm-8">
-                    <input class="form-control" asp-for="Email">
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <label class="col-sm-4 col-form-label">Senha</label>
-                <div class="col-sm-8">
-                    <input class="form-control" type="password" asp-for="Senha">
-                    <span asp-validation-for="Senha" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <label class="col-sm-4 col-form-label">Confirmar Senha</label>
-                <div class="col-sm-8">
-                    <input class="form-control" type="password" asp-for="ConfirmarSenha">
-                    <span asp-validation-for="ConfirmarSenha" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <div class="offset-sm-4 col-sm-4 d-grid">
-                    <button type="submit" class="btn btn-light">Registrar</button>
-                </div>
-                <div class="col-sm-4 d-grid">
-                    <a class="btn btn-outline-light" asp-controller="Home" asp-action="Index" role="button">
-                        Cancelar
-                    </a>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
+
+<!-- Adicionar os links para o Bootstrap CSS e JS se ainda não estiverem no seu layout principal -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>

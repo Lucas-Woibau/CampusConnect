@@ -25,13 +25,11 @@ namespace CampusConnect.Models
         [Required(ErrorMessage = "Preencha sua instituição."), MaxLength(100)]
         public string Instituicao { get; set; } = "";
 
-        [Required(ErrorMessage = "Preencha seu matricula."), MaxLength(100)]
         public string Matricula { get; set; } = "";
 
         [Required(ErrorMessage = "Preencha seu curso."), MaxLength(100)]
         public string Curso { get; set; } = "";
 
-        [Required(ErrorMessage = "Preencha seu periodo."), MaxLength(100)]
         public string Periodo { get; set; } = "";
     }
 }

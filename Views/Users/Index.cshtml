@@ -4,6 +4,8 @@
 @inject UserManager<ApplicationUser> UserManager
 
 @{
+    int pageIndex = (int)ViewData["PageIndex"]!;
+    int totalPages = (int)ViewData["TotalPages"]!;
 }
 
 <h2 class="text-center mb-5">Lista de Alunos</h2>
@@ -132,3 +134,17 @@
         }
     </tbody>
 </table>
+
+<nav>
+    <ul class="pagination">
+        @for (int i = 1; i <= totalPages; i++)
+        {
+            string active = "";
+            if (i == pageIndex) active = "active";
+            <li class="page-item @active">
+                <a class="page-link" asp-route-pageIndex="@i"
+                   >@i</a>
+            </li>
+        }
+    </ul>
+</nav>

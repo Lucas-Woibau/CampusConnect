@@ -141,9 +141,12 @@
                     </div>
 
                     <div class="row mb-2">
-                        <label for="Rota" class="col-sm-4 col-form-label">Rota</label>
+                        <label for="Cidade" class="col-sm-4 col-form-label">Rota</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="Rota" asp-for="Rota" />
+                            <select class="form-select" asp-for="Rota" aria-label="">
+                                <option value="UNESC">UNESC</option>
+                                <option value="CASTELO BRANCO/IFES">CASTELO BRANCO/IFES</option>
+                            </select>
                             <span asp-validation-for="Rota" class="text-danger"></span>
                         </div>
                     </div>

@@ -12,7 +12,7 @@ namespace CampusConnect.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly int _pageSize = 10;
+        private readonly int _pageSize = 2;
 
         public UsersController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {

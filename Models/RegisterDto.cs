@@ -4,33 +4,32 @@ namespace CampusConnect.Models
 {
     public class RegisterDto
     {
-        [Required(ErrorMessage = "Preencha seu primeiro nome."), MaxLength(100)]
+        [Required(ErrorMessage = "Digite seu primeiro nome."), MaxLength(100)]
         public string Nome { get; set; } = "";
 
-        [Required(ErrorMessage = "Preencha seu sobrenome."), MaxLength(100)]
+        [Required(ErrorMessage = "Digite seu sobrenome."), MaxLength(100)]
         public string Sobrenome { get; set; } = "";
 
         [Phone(ErrorMessage = "O formato do telefone está incorreto"), MaxLength(20)]
         public string Telefone { get; set; } = "";
 
-        [Required, EmailAddress, MaxLength(100)]
+        [Required(ErrorMessage = "Digite seu email."), EmailAddress, MaxLength(100)]
         public string Email { get; set; } = "";
 
-        [Required, MaxLength(100)]
+        [Required(ErrorMessage = "Digite a cidade mais próxima."), MaxLength(100)]
         public string Cidade { get; set; } = "";
 
-        [Required, MaxLength(100)]
+        [Required(ErrorMessage = "Escolha a rota."), MaxLength(100)]
         public string Rota { get; set; } = "";
 
-        [Required, MaxLength(100)]
+        [Required(ErrorMessage = "Digite sua instituição de ensino."), MaxLength(100)]
         public string Instituicao { get; set; } = "";
 
         public string Matricula { get; set; } = "";
 
-        [Required, MaxLength(100)]
+        [Required(ErrorMessage = "Digite o seu curso."), MaxLength(100)]
         public string Curso { get; set; } = "";
 
-        [Required, MaxLength(100)]
         public string Periodo { get; set; } = "";
 
         [Required, MaxLength(100)]
