@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace CampusConnect.Controllers
 {
@@ -12,7 +13,7 @@ namespace CampusConnect.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly int _pageSize = 2;
+        private readonly int _pageSize = 25;
 
         public UsersController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
@@ -20,9 +21,14 @@ namespace CampusConnect.Controllers
             _roleManager = roleManager;
         }
 
-        public IActionResult Index(int? pageIndex)
+        public IActionResult Index(int? pageIndex, string? search, string? rota, string? cidade)
         {
-            IQueryable<ApplicationUser> query = _userManager.Users.OrderByDescending(o => o.Nome);
+            IQueryable<ApplicationUser> query = _userManager.Users;
+
+            if (search != null)
+            {
+                query = query.Where(p => p.Nome.Contains(search) || p.Instituicao.Contains(search));
+            }
 
             if (pageIndex == null || pageIndex < 1)
             {
@@ -37,6 +43,8 @@ namespace CampusConnect.Controllers
 
             ViewBag.PageIndex = pageIndex;
             ViewBag.TotalPages = totalPages;
+
+            ViewBag.Search = search;
 
             return View(users);
         }

@@ -6,13 +6,18 @@
 @{
     int pageIndex = (int)ViewData["PageIndex"]!;
     int totalPages = (int)ViewData["TotalPages"]!;
+
+    string search = (string)ViewData["Search"]!;
 }
 
 <h2 class="text-center mb-5">Lista de Alunos</h2>
 
-<div class="input-group flex-nowrap mb-5" style="width:25%">
-    <span class="input-group-text" id="addon-wrapping">Pesquisar</span>
-    <input class="form-control" type="search" name="search" value="" placeholder="Search by Name or Brand" aria-label="Search">
+<div class="input-group flex-nowrap mb-5">
+    <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" name="search" value="@search" placeholder="Pesquisar" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Pesquisar</button>
+    </form>
+    
 </div>
 
 <table id="dataTable" class="table table-striped" style="width:100%">
@@ -20,10 +25,10 @@
         <tr>
             <th>Nome</th>
             <th>Instituição</th>
-            <th>Cidade</th>
-            <th>Curso</th>
-            <th>Telefone</th>
-            <th>Email</th>
+            <th class="d-none d-md-table-cell">Cidade</th>
+            <th class="d-none d-md-table-cell">Curso</th>
+            <th class="d-none d-md-table-cell">Telefone</th>
+            <th class="d-none d-md-table-cell">Email</th>
             <th style="width:5px"></th>
         </tr>
     </thead>
@@ -33,22 +38,22 @@
             <tr>
                 <td>@(user.Nome + " " + user.Sobrenome)</td>
                 <td>@user.Instituicao</td>
-                <td>@user.Cidade</td>
-                <td>@user.Curso</td>
-                <td>@user.PhoneNumber</td>
-                <td>@user.Email</td>
+                <td class="d-none d-md-table-cell">@user.Cidade</td>
+                <td class="d-none d-md-table-cell">@user.Curso</td>
+                <td class="d-none d-md-table-cell">@user.PhoneNumber</td>
+                <td class="d-none d-md-table-cell">@user.Email</td>
 
                 <td>
                     <!-- Botão Detalhes e Deletar -->
                     <div class="d-flex">
                         <button type="button" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal"
                                 data-bs-target="#detailsModal-@user.Id">
-                            Detalhes
+                            <i class="fa-solid fa-circle-info"></i>
                         </button>
 
                         <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#deleteModal-@user.Id">
-                            Deletar
+                            <i class="fa-solid fa-trash"></i>
                         </button>
                     </div>
                 </td>
@@ -142,8 +147,7 @@
             string active = "";
             if (i == pageIndex) active = "active";
             <li class="page-item @active">
-                <a class="page-link" asp-route-pageIndex="@i"
-                   >@i</a>
+                <a class="page-link" asp-route-pageIndex="@i">@i</a>
             </li>
         }
     </ul>
