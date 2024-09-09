@@ -10,145 +10,170 @@
     string search = (string)ViewData["Search"]!;
 }
 
-<h2 class="text-center mb-5">Lista de Alunos</h2>
+<div class="container mt-4">
 
-<div class="input-group flex-nowrap mb-5">
-    <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" name="search" value="@search" placeholder="Pesquisar" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Pesquisar</button>
-    </form>
-    
-</div>
+    <h2 class="text-center mb-5">Lista de Alunos</h2>
 
-<table id="dataTable" class="table table-striped" style="width:100%">
-    <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Instituição</th>
-            <th class="d-none d-md-table-cell">Cidade</th>
-            <th class="d-none d-md-table-cell">Curso</th>
-            <th class="d-none d-md-table-cell">Telefone</th>
-            <th class="d-none d-md-table-cell">Email</th>
-            <th style="width:5px"></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in Model)
-        {
+    <div class="input-group flex-nowrap mb-3">
+        <div class="d-flex flex-column flex-md-row w-100">
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" name="search" value="@search" placeholder="Pesquisar" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Pesquisar</button>
+            </form>
+
+            <div class="mt-2 mt-md-0 ms-md-auto">
+                <button class="btn btn-outline-info w-100 w-md-auto ms-auto me-2" data-bs-toggle="modal"
+                        data-bs-target="#filterModal">
+                    Filtrar busca
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <table id="dataTable" class="table table-striped" style="width:100%">
+        <thead>
             <tr>
-                <td>@(user.Nome + " " + user.Sobrenome)</td>
-                <td>@user.Instituicao</td>
-                <td class="d-none d-md-table-cell">@user.Cidade</td>
-                <td class="d-none d-md-table-cell">@user.Curso</td>
-                <td class="d-none d-md-table-cell">@user.PhoneNumber</td>
-                <td class="d-none d-md-table-cell">@user.Email</td>
-
-                <td>
-                    <!-- Botão Detalhes e Deletar -->
-                    <div class="d-flex">
-                        <button type="button" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal"
-                                data-bs-target="#detailsModal-@user.Id">
-                            <i class="fa-solid fa-circle-info"></i>
-                        </button>
-
-                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#deleteModal-@user.Id">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </div>
-                </td>
+                <th>Nome</th>
+                <th>Instituição</th>
+                <th class="d-none d-md-table-cell">Cidade</th>
+                <th class="d-none d-md-table-cell">Curso</th>
+                <th class="d-none d-md-table-cell">Telefone</th>
+                <th class="d-none d-md-table-cell">Email</th>
+                <th style="width:5px"></th>
             </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@(user.Nome + " " + user.Sobrenome)</td>
+                    <td>@user.Instituicao</td>
+                    <td class="d-none d-md-table-cell">@user.Cidade</td>
+                    <td class="d-none d-md-table-cell">@user.Curso</td>
+                    <td class="d-none d-md-table-cell">@user.PhoneNumber</td>
+                    <td class="d-none d-md-table-cell">@user.Email</td>
 
-            <div class="modal fade" id="detailsModal-@user.Id" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Detalhes da conta: @user.Nome @user.Sobrenome</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <td>
+                        <!-- Botão Detalhes e Deletar -->
+                        <div class="d-flex">
+                            <button type="button" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal"
+                                    data-bs-target="#detailsModal-@user.Id">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </button>
+
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#deleteModal-@user.Id">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
                         </div>
-                        <div class="modal-body">
-                            <div class="row mb-2">
-                                <div class="col-sm-4">Nome</div>
-                                <div class="col-sm-8">@user.Nome</div>
+                    </td>
+                </tr>
+
+                <!-- Modal details -->
+                <div class="modal fade" id="detailsModal-@user.Id" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Detalhes da conta: @user.Nome @user.Sobrenome</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="row mb-2">
-                                <div class="col-sm-4">Sobrenome</div>
-                                <div class="col-sm-8">@user.Sobrenome</div>
+                            <div class="modal-body">
+                                <div class="row mb-2">
+                                    <div class="col-sm-4">Nome</div>
+                                    <div class="col-sm-8">@user.Nome</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-sm-4">Sobrenome</div>
+                                    <div class="col-sm-8">@user.Sobrenome</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-sm-4">Telefone</div>
+                                    <div class="col-sm-8">@user.PhoneNumber</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-sm-4">Cidade</div>
+                                    <div class="col-sm-8">@user.Cidade</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-sm-4">Rota</div>
+                                    <div class="col-sm-8">@user.Rota</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-sm-4">Instituição</div>
+                                    <div class="col-sm-8">@user.Instituicao</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-sm-4">Curso</div>
+                                    <div class="col-sm-8">@user.Curso</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-sm-4">Matrícula</div>
+                                    <div class="col-sm-8">@user.Matricula</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-sm-4">Período</div>
+                                    <div class="col-sm-8">@user.Periodo</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-sm-4">Email</div>
+                                    <div class="col-sm-8">@user.Email</div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                </div>
                             </div>
-                            <div class="row mb-2">
-                                <div class="col-sm-4">Telefone</div>
-                                <div class="col-sm-8">@user.PhoneNumber</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal delete -->
+                <div class="modal fade" id="deleteModal-@user.Id" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Deletar conta</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                </button>
                             </div>
-                            <div class="row mb-2">
-                                <div class="col-sm-4">Cidade</div>
-                                <div class="col-sm-8">@user.Cidade</div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col-sm-4">Rota</div>
-                                <div class="col-sm-8">@user.Rota</div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col-sm-4">Instituição</div>
-                                <div class="col-sm-8">@user.Instituicao</div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col-sm-4">Curso</div>
-                                <div class="col-sm-8">@user.Curso</div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col-sm-4">Matrícula</div>
-                                <div class="col-sm-8">@user.Matricula</div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col-sm-4">Período</div>
-                                <div class="col-sm-8">@user.Periodo</div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col-sm-4">Email</div>
-                                <div class="col-sm-8">@user.Email</div>
+                            <div class="modal-body">
+                                <strong>Conta: @user.Nome @user.Sobrenome</strong>
+                                <p>Tem certeza que deseja deletar essa conta?</p>
                             </div>
                             <div class="modal-footer">
+                                <a class="btn btn-danger" role="button" asp-controller="Users" asp-action="DeleteAccount" asp-route-id="@user.Id">
+                                    Deletar
+                                </a>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            }
+        </tbody>
+    </table>
+    <nav>
+        <ul class="pagination">
+            @for (int i = 1; i <= totalPages; i++)
+            {
+                string active = "";
+                if (i == pageIndex) active = "active";
+                <li class="page-item @active">
+                    <a class="page-link" asp-route-pageIndex="@i">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>
 
-            <div class="modal fade" id="deleteModal-@user.Id" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Deletar conta</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <strong>Conta: @user.Nome @user.Sobrenome</strong>
-                            <p>Tem certeza que deseja deletar essa conta?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <a class="btn btn-danger" role="button" asp-controller="Users" asp-action="DeleteAccount" asp-route-id="@user.Id">
-                                Deletar
-                            </a>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        </div>
-                    </div>
-                </div>
+<!-- Modal filter -->
+<div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Filtrar pesquisa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
             </div>
-        }
-    </tbody>
-</table>
+        </div>
+    </div>
 
-<nav>
-    <ul class="pagination">
-        @for (int i = 1; i <= totalPages; i++)
-        {
-            string active = "";
-            if (i == pageIndex) active = "active";
-            <li class="page-item @active">
-                <a class="page-link" asp-route-pageIndex="@i">@i</a>
-            </li>
-        }
-    </ul>
-</nav>
