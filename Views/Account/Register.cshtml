@@ -144,9 +144,14 @@
 
                         <!-- Botões -->
                         <div class="d-grid gap-2 mt-4">
-                            <button type="submit" class="btn btn-primary btn-lg">Registrar</button>
-                            <a class="btn btn-light border btn-lg" asp-controller="Home" asp-action="Index" role="button">
-                                Cancelar
+                            <button type="submit" class="btn btn-success btn-lg">Registrar</button>
+
+                            <div class="text-center my-3">
+                                <span>Já possui uma conta?</span>
+                            </div>
+
+                            <a class="btn btn-primary btn-lg" asp-controller="Account" asp-action="Login" role="button">
+                                Entrar
                             </a>
                         </div>
                     </form>

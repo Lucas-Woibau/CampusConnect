@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - CampusConnect</title>
+    <title>Campus Connect</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CampusConnect.styles.css" asp-append-version="true" />
@@ -12,14 +12,14 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark box-shadow" style="background-color:black">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm bg-dark border-bottom border-body">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CampusConnect</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                
+
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         @if (SignInManager.IsSignedIn(User))
@@ -64,7 +64,7 @@
                                         @(appUser!.Nome)
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item"  asp-area="" asp-controller="Account" asp-action="Profile">Perfil</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Profile">Perfil</a></li>
                                         <li><hr class="dropdown-divider"></li>
                                         <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Sair</a></li>
                                     </ul>
@@ -73,7 +73,7 @@
                         }
                         else
                         {
-                            <ul class="navbar-nav">                               
+                            <ul class="navbar-nav">
                                 <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Sair</a></li>
                             </ul>
                         }
@@ -85,7 +85,7 @@
                                 <a class="btn btn-primary me-2" asp-area="" asp-controller="Account" asp-action="Register">Registrar</a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn btn-light" asp-area="" asp-controller="Account" asp-action="Login">Entrar</a>
+                                <a class="btn btn-success" asp-area="" asp-controller="Account" asp-action="Login">Entrar</a>
                             </li>
                         </ul>
                     }

@@ -37,24 +37,25 @@
                     <label class="form-check-label" for="lembrarCheck">Manter conectado</label>
                 </div>
 
-                <div class="row mb-3">
-                    <div class="col d-grid">
-                        <button type="submit" class="btn btn-primary">Entrar</button>
+                <div class="d-flex flex-column mb-3">
+                    <div class="mb-2">
+                        <button type="submit" class="btn btn-success w-100">Entrar</button>
                     </div>
-                    <div class="col d-grid">
-                        <a class="btn btn-light border" asp-controller="Home" asp-action="Index" role="button">
-                            Cancelar
+
+                    <div class="text-center my-3">
+                        <span>Ainda não possui uma conta?</span>
+                    </div>
+
+                    <div>
+                        <a class="btn btn-primary border w-100" asp-controller="Account" asp-action="Register" role="button">
+                            Registrar
                         </a>
                     </div>
                 </div>
+
                 <div class="text-left">
                     <a class="link" asp-controller="Account" asp-action="ForgotPassword" style="text-decoration:none">
                         Esqueceu a sua senha?
-                    </a>
-                </div>
-                <div class="col d-grid">
-                    <a class="link" asp-controller="Account" asp-action="Register" style="text-decoration:none">
-                        Não possuo uma conta!
                     </a>
                 </div>
             </form>

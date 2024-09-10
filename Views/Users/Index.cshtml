@@ -10,7 +10,7 @@
     string search = (string)ViewData["Search"]!;
 }
 
-<div class="container mt-4">
+<div class="container mt-4 w-100">
 
     <h2 class="text-center mb-5">Lista de Alunos</h2>
 
@@ -18,11 +18,11 @@
         <div class="d-flex flex-column flex-md-row w-100">
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" name="search" value="@search" placeholder="Pesquisar" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Pesquisar</button>
+                <button class="btn btn-success" type="submit">Pesquisar</button>
             </form>
 
             <div class="mt-2 mt-md-0 ms-md-auto">
-                <button class="btn btn-outline-info w-100 w-md-auto ms-auto me-2" data-bs-toggle="modal"
+                <button class="btn btn-info w-100 w-md-auto ms-auto me-2" data-bs-toggle="modal"
                         data-bs-target="#filterModal">
                     Filtrar busca
                 </button>
@@ -30,8 +30,8 @@
         </div>
     </div>
 
-    <table id="dataTable" class="table table-striped" style="width:100%">
-        <thead>
+    <table class="table table-striped-sm" style="width:100%">
+        <thead class="shadow-sm">
             <tr>
                 <th>Nome</th>
                 <th>Instituição</th>
