@@ -1,8 +1,5 @@
 {
   "dependencies": {
     "bootstrap": "^5.3.3"
-  },
-  "sdk": {
-    "version": "8.0.302"
   }
 }
