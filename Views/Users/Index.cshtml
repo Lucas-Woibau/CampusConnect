@@ -1,51 +1,46 @@
 ﻿@using CampusConnect.Models
 @using Microsoft.AspNetCore.Html
 ﻿@using Microsoft.AspNetCore.Identity
-@model List<ApplicationUser>
+@model SearchUsers
 @inject UserManager<ApplicationUser> UserManager
 
 @{
-    int pageIndex = (int)ViewData["PageIndex"]!;
-    int totalPages = (int)ViewData["TotalPages"]!;
-
-    string search = (string)ViewData["Search"]!;
 }
 
 <div class="container mt-4 w-100">
 
     <h2 class="text-center mb-5">Lista de Alunos</h2>
-
-    <div class="input-group flex-nowrap mb-3">
-        <div class="d-flex flex-column flex-md-row w-100">
-            <div class="d-flex flex-column flex-sm-row mb-2 mb-md-0">
-                <select class="form-select me-0 me-sm-2 mb-2 mb-sm-0">
-                    <option selected>Todas as rotas</option>
-                    <option value="1">UNESC</option>
-                    <option value="2">CASTELO/CENTRO/IFES</option>
-                </select>
-                <select class="form-select me-0 me-sm-2 mb-2 mb-sm-0">
-                    <option selected>Todas as cidades</option>
-                    <option value="1">PANCAS</option>
-                    <option value="2">LAGINHA</option>
-                    <option value="3">VILA VERDE</option>
-                </select>
-                <select class="form-select">
-                    <option selected>Todas as instituições</option>
-                    <option value="1">UNESC</option>
-                    <option value="2">CASTELO BRANCO</option>
-                    <option value="3">IFES</option>
-                    <option value="3">SENAI</option>
-                </select>
+    <form>
+        <div class="input-group flex-nowrap mb-3">
+            <div class="d-flex flex-column flex-md-row w-100">
+                <div class="d-flex flex-column flex-sm-row mb-2 mb-md-0">
+                    <select class="form-select me-0 me-sm-2 mb-2 mb-sm-0" asp-for="Rota" onchange="this.form.submit()">
+                        <option value="">Todas as rotas</option>
+                        <option value="UNESC">UNESC</option>
+                        <option value="CASTELO/CENTRO/IFES">CASTELO/CENTRO/IFES</option>
+                    </select>
+                    <select class="form-select me-0 me-sm-2 mb-2 mb-sm-0" asp-for="Cidade" onchange="this.form.submit()">
+                        <option value="">Todas as cidades</option>
+                        <option value="PANCAS">PANCAS</option>
+                        <option value="LAGINHA">LAGINHA</option>
+                        <option value="VILA VERDE">VILA VERDE</option>
+                    </select>
+                    <select class="form-select" asp-for="Instituicao" onchange="this.form.submit()">
+                        <option value="">Todas as instituições</option>
+                        <option value="UNESC">UNESC</option>
+                        <option value="CASTELO BRANCO">CASTELO BRANCO</option>
+                        <option value="IFES">IFES</option>
+                        <option value="SENAI">SENAI</option>
+                    </select>
+                </div>
+                <div class="d-flex ms-md-auto" role="search">
+                    <input class="form-control me-2" type="search" name="search"  asp-for="Search" placeholder="Pesquisar" aria-label="Search">
+                    <button class="btn btn-success" type="submit">Pesquisar</button>
+                </div>
             </div>
-            <form class="d-flex ms-md-auto" role="search">
-                <input class="form-control me-2" type="search" name="search" value="@search" placeholder="Pesquisar" aria-label="Search">
-                <button class="btn btn-success" type="submit">Pesquisar</button>
-            </form>
         </div>
-    </div>
-
-
-
+    </form>
+   
     <table class="table table-striped-sm" style="width:100%">
         <thead class="shadow-sm">
             <tr>
@@ -59,7 +54,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var user in Model)
+            @foreach (var user in ViewBag.Users)
             {
                 <tr>
                     <td>@(user.Nome + " " + user.Sobrenome)</td>
@@ -169,10 +164,10 @@
     </table>
     <nav>
         <ul class="pagination">
-            @for (int i = 1; i <= totalPages; i++)
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
             {
                 string active = "";
-                if (i == pageIndex) active = "active";
+                if (i == ViewBag.PageIndex) active = "active";
                 <li class="page-item @active">
                     <a class="page-link" asp-route-pageIndex="@i">@i</a>
                 </li>

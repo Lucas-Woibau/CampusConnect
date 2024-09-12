@@ -21,13 +21,28 @@ namespace CampusConnect.Controllers
             _roleManager = roleManager;
         }
 
-        public IActionResult Index(int? pageIndex, string? search, string? rota, string? cidade)
+        public IActionResult Index(int? pageIndex, string? search, string? rota, string? cidade, string? instituicao)
         {
             IQueryable<ApplicationUser> query = _userManager.Users;
 
             if (search != null)
             {
-                query = query.Where(p => p.Nome.Contains(search) || p.Instituicao.Contains(search));
+                query = query.Where(p => p.Nome.Contains(search) || p.Sobrenome.Contains(search));
+            }
+
+            if (rota != null && rota.Length > 0)
+            {
+                query = query.Where(p => p.Rota.Contains(rota));
+            }
+
+            if (cidade != null && cidade.Length > 0)
+            {
+                query = query.Where(p => p.Cidade.Contains(cidade));
+            }
+
+            if (instituicao != null && instituicao.Length > 0)
+            {
+                query = query.Where(p => p.Instituicao.Contains(instituicao));
             }
 
             if (pageIndex == null || pageIndex < 1)
@@ -41,12 +56,21 @@ namespace CampusConnect.Controllers
 
             var users = query.ToList();
 
+            ViewBag.Users = users;
+
             ViewBag.PageIndex = pageIndex;
             ViewBag.TotalPages = totalPages;
-
             ViewBag.Search = search;
 
-            return View(users);
+            var SearchUsers = new SearchUsers()
+            {
+                Search = search,
+                Rota = rota,
+                Cidade = cidade,
+                Instituicao = instituicao,
+            };
+
+            return View(SearchUsers);
         }
 
         public async Task<IActionResult> Details(string? id)

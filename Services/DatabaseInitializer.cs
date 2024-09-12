@@ -14,7 +14,6 @@ namespace CampusConnect.Services
                 return;
             }
 
-            //Verifica se as role existem
             var exists = await roleManager.RoleExistsAsync("admin");
             if (!exists)
             {
