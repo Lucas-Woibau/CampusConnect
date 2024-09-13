@@ -70,6 +70,13 @@ namespace CampusConnect.Controllers
                 Instituicao = instituicao,
             };
 
+            var todasInstituicoes = _userManager.Users
+                .Select(u => u.Instituicao)
+                .Distinct()
+                .ToList();
+
+            ViewData["Instituicoes"] = todasInstituicoes;
+
             return View(SearchUsers);
         }
 
@@ -157,7 +164,7 @@ namespace CampusConnect.Controllers
             if (currentUser!.Id == appUser.Id)
             {
                 TempData["ErrorMessage"] = "You cannot delete your own role!";
-                return RedirectToAction("Details", "Users", new { id });
+                return RedirectToAction("Index", "Users", new { id });
             }
 
             // Delete
@@ -169,7 +176,7 @@ namespace CampusConnect.Controllers
 
             TempData["ErrorMessage"] = "Unable to delete this account: " + result.Errors.First().Description;
 
-            return RedirectToAction("Details", "Users", new { id });
+            return RedirectToAction("Index", "Users", new { id });
         }
     }
 }

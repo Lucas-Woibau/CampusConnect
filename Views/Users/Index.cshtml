@@ -5,6 +5,8 @@
 @inject UserManager<ApplicationUser> UserManager
 
 @{
+    var instituicoes = ViewData["Instituicoes"] as List<string>;
+    var instituicoesPadrao = new[] { "UNESC", "CASTELO BRANCO", "IFES", "SENAI" };
 }
 
 <div class="container mt-4 w-100">
@@ -27,10 +29,19 @@
                     </select>
                     <select class="form-select" asp-for="Instituicao" onchange="this.form.submit()">
                         <option value="">Todas as instituições</option>
-                        <option value="UNESC">UNESC</option>
-                        <option value="CASTELO BRANCO">CASTELO BRANCO</option>
-                        <option value="IFES">IFES</option>
-                        <option value="SENAI">SENAI</option>
+
+                        @foreach (var instituicao in instituicoesPadrao)
+                        {
+                            <option value="@instituicao">@instituicao</option>
+                        }
+
+                        @foreach (var instituicao in instituicoes)
+                        {
+                            @if (!instituicoesPadrao.Contains(instituicao))
+                            {
+                                <option value="@instituicao">@instituicao</option>
+                            }
+                        }
                     </select>
                 </div>
                 <div class="d-flex ms-md-auto" role="search">

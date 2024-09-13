@@ -2,7 +2,7 @@
 @{
 }
 
-<div class="container my-5" >
+<div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-4">
             <div class="card shadow-lg border border-dark">
@@ -13,7 +13,6 @@
 
                     <form method="post">
                         <div class="row">
-                            <!-- Primeira coluna com 6 campos -->
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
                                     <label for="Nome" class="form-label">Primeiro Nome</label>
@@ -47,7 +46,11 @@
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
                                     <label for="Cidade" class="form-label">Cidade</label>
-                                    <input class="form-control @(ViewData.ModelState["Cidade"]?.Errors.Count > 0 ? "is-invalid" : "")" asp-for="Cidade" placeholder="Digite sua cidade">
+                                    <select class="form-select @(ViewData.ModelState["Cidade"]?.Errors.Count > 0 ? "is-invalid" : "")" asp-for="Cidade">
+                                        <option value="PANCAS">PANCAS</option>
+                                        <option value="LAGINHA">LAGINHA</option>
+                                        <option value="VILA VERDE">VILA VERDE</option>
+                                    </select>
                                     <div class="invalid-feedback">
                                         <span asp-validation-for="Cidade"></span>
                                     </div>
@@ -73,16 +76,30 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="row">
-                            <!-- Segunda coluna com os outros 6 campos -->
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
                                     <label for="Instituicao" class="form-label">Instituição</label>
-                                    <input class="form-control @(ViewData.ModelState["Instituicao"]?.Errors.Count > 0 ? "is-invalid" : "")" asp-for="Instituicao" placeholder="Digite sua instituição">
+                                    <select id="instituicaoSelect" class="form-select @(ViewData.ModelState["Instituicao"]?.Errors.Count > 0 ? "is-invalid" : "")" asp-for="Instituicao">
+                                        <option value="">Selecione a instituição</option>
+                                        <option value="UNESC">UNESC</option>
+                                        <option value="CASTELO BRANCO">CASTELO BRANCO</option>
+                                        <option value="IFES">IFES</option>
+                                        <option value="SENAI">SENAI</option>
+                                        <option value="OUTRA">OUTRA</option>
+                                    </select>
                                     <div class="invalid-feedback">
                                         <span asp-validation-for="Instituicao"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3" id="outraInstituicaoDiv" style="display:none;">
+                                <div class="form-group">
+                                    <label for="Instituicao" class="form-label">Nome da instituição</label>
+                                    <input id="novaInstituicao" class="form-control @(ViewData.ModelState["NovaInstituicao"]?.Errors.Count > 0 ? "is-invalid" : "")" asp-for="NovaInstituicao" placeholder="Digite o nome da instituicao">
+                                    <div class="invalid-feedback">
+                                        <span asp-validation-for="NovaInstituicao"></span>
                                     </div>
                                 </div>
                             </div>
@@ -140,27 +157,34 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="d-grid gap-2 mt-4">
+                                <button type="submit" class="btn btn-success btn-lg">Registrar</button>
 
-                        <!-- Botões -->
-                        <div class="d-grid gap-2 mt-4">
-                            <button type="submit" class="btn btn-success btn-lg">Registrar</button>
+                                <div class="text-center my-3">
+                                    <span>Já possui uma conta?</span>
+                                </div>
 
-                            <div class="text-center my-3">
-                                <span>Já possui uma conta?</span>
+                                <a class="btn btn-primary btn-lg" asp-controller="Account" asp-action="Login" role="button">
+                                    Entrar
+                                </a>
                             </div>
-
-                            <a class="btn btn-primary btn-lg" asp-controller="Account" asp-action="Login" role="button">
-                                Entrar
-                            </a>
-                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Adicionar os links para o Bootstrap CSS e JS se ainda não estiverem no seu layout principal -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('instituicaoSelect').addEventListener('change', function () {
+            var outraInstituicaoDiv = document.getElementById('outraInstituicaoDiv');
+            if (this.value === 'OUTRA') {
+                outraInstituicaoDiv.style.display = 'block';
+            } else {
+                outraInstituicaoDiv.style.display = 'none';
+            }
+        });
+    </script>
+
+    <!-- Adicionar os links para o Bootstrap CSS e JS se ainda não estiverem no seu layout principal -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>

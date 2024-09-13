@@ -25,6 +25,9 @@ namespace CampusConnect.Models
         [Required(ErrorMessage = "Digite sua instituição de ensino."), MaxLength(100)]
         public string Instituicao { get; set; } = "";
 
+        [Required(ErrorMessage = "Digite sua instituição de ensino."), MaxLength(100)]
+        public string NovaInstituicao { get; set; } = "";
+
         public string Matricula { get; set; } = "";
 
         [Required(ErrorMessage = "Digite o seu curso."), MaxLength(100)]

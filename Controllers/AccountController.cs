@@ -39,6 +39,10 @@ namespace CampusConnect.Controllers
             {
                 return View(registerDto);
             }
+            if (registerDto.Instituicao == "OUTRA" && !string.IsNullOrEmpty(registerDto.NovaInstituicao))
+            {
+                registerDto.Instituicao = registerDto.NovaInstituicao;
+            }
             var user = new ApplicationUser()
             {
                 Nome = registerDto.Nome,
@@ -160,6 +164,11 @@ namespace CampusConnect.Controllers
             if (appUser == null)
             {
                 return RedirectToAction("Index", "Home");
+            }
+
+            if (profileDto.Instituicao == "OUTRA" && !string.IsNullOrEmpty(profileDto.NovaInstituicao))
+            {
+                profileDto.Instituicao = profileDto.NovaInstituicao;
             }
 
             appUser.Nome = profileDto.Nome;
