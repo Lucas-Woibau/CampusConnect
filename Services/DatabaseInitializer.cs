@@ -8,7 +8,7 @@ namespace CampusConnect.Services
         public static async Task SeedDataAscync(UserManager<ApplicationUser>? userManager,
             RoleManager<IdentityRole>? roleManager)
         {
-            if(userManager == null || roleManager == null)
+            if (userManager == null || roleManager == null)
             {
                 Console.WriteLine("UserManager ou RoleManager é nullo => Sair");
                 return;

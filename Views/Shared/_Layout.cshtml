@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Campus Connect</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <title>Campus Connect</title>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CampusConnect.styles.css" asp-append-version="true" />
     <script src="https://kit.fontawesome.com/0a770bd101.js" crossorigin="anonymous"></script>
@@ -12,87 +12,75 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm shadow border-body" style="background-color:#010409">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CampusConnect</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+    <nav class="navbar shadow border-body" style="background-color:#010409">
+        <div class="container">
+            <a asp-area="" asp-controller="Home" asp-action="Index">
+                <img src="/images/LOGO.png" width="50px"/>
+            </a>
+            
+            <div class="d-flex justify-content-between">
 
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        @if (SignInManager.IsSignedIn(User))
-                        {
-                            if (User.IsInRole("admin"))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-light" asp-area="" asp-controller="Users" asp-action="Index">Alunos</a>
-                                </li>
-                            }
-                        }
-                    </ul>
+                @using Microsoft.AspNetCore.Identity
+                @inject SignInManager<ApplicationUser> SignInManager
+                @inject UserManager<ApplicationUser> UserManager
 
-                    @using Microsoft.AspNetCore.Identity
-                    @inject SignInManager<ApplicationUser> SignInManager
-                    @inject UserManager<ApplicationUser> UserManager
-
-                    @if (SignInManager.IsSignedIn(User))
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    var appUser = await UserManager.GetUserAsync(User);
+                    if (User.IsInRole("admin"))
                     {
-                        var appUser = await UserManager.GetUserAsync(User);
-                        if (User.IsInRole("admin"))
-                        {
-                            <ul class="navbar-nav">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        @(appUser!.Nome + "(Admin)")
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" asp-area="" asp-controller="Users" asp-action="Index">Alunos</a></li>
-                                        <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Profile">Perfil</a></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Sair</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        }
-                        else if (User.IsInRole("aluno"))
-                        {
-                            <ul class="navbar-nav">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        @(appUser!.Nome)
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Profile">Perfil</a></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Sair</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        }
-                        else
-                        {
-                            <ul class="navbar-nav">
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Sair</a></li>
-                            </ul>
-                        }
+                        <div class="dropdown">
+                            <div class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    @(appUser!.Nome + "(Admin)")
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Users" asp-action="Index">Alunos</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Profile">Perfil</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Sair</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     }
-                    else
+                    else if (User.IsInRole("aluno"))
                     {
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="btn btn-primary me-2" asp-area="" asp-controller="Account" asp-action="Register">Registrar</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="btn btn-success" asp-area="" asp-controller="Account" asp-action="Login">Entrar</a>
+                        <ul class="navbar-nav d-flex align-items-center">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    @(appUser!.Nome)
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Profile">Perfil</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Sair</a></li>
+                                </ul>
                             </li>
                         </ul>
                     }
-                </div>
+                    else
+                    {
+                        <ul class="navbar-nav d-flex align-items-center">
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Sair</a></li>
+                        </ul>
+                    }
+                }
+                else
+                {
+                    <div class="navbar d-flex">
+                        <div class="nav-item me-2">
+                            <a class="btn btn-primary" asp-area="" asp-controller="Account" asp-action="Register">Registrar</a>
+                        </div>
+                        <div class="nav-item">
+                            <a class="btn btn-success" asp-area="" asp-controller="Account" asp-action="Login">Entrar</a>
+                        </div>
+                    </div>
+                }
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
+</header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
