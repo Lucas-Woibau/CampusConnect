@@ -28,7 +28,6 @@
                 </div>
             }
 
-
             <div class="row mb-2">
                 <div class="col-sm-4">Classe</div>
                 <div class="col-sm-8">@userRole</div>
@@ -172,7 +171,7 @@
                         <div class="row mb-2" id="outraInstituicaoDiv" style="display:none;">
                             <label for="novaInstituicao" class="col-sm-4 col-form-label">Outra instituição</label>
                             <div class="col-sm-8">
-                                <input type="text" id="novaInstituicao" id="novaInstituicao" class="form-control" asp-for="NovaInstituicao" placeholder="Digite o nome da instituição">
+                                <input type="text" id="novaInstituicao" class="form-control" asp-for="NovaInstituicao" placeholder="Digite o nome da instituição" >
                                 <span asp-validation-for="NovaInstituicao"></span>
                             </div>
                         </div>
@@ -240,7 +239,7 @@
         var novaInstituicaoInput = document.getElementById('novaInstituicao');
 
         // Define o valor selecionado do <select> com base na instituição atual
-        var instituicaoAtual = '@Model.Instituicao';
+        var instituicaoAtual = '@Html.Raw(Model.Instituicao)';
         instituicaoSelect.value = instituicaoAtual;
 
         // Se a instituição atual não está entre as opções listadas, seleciona "OUTRA" e mostra o campo adicional
@@ -263,6 +262,4 @@
     instituicaoSelect.addEventListener('change', function () {
         toggleOutraInstituicao(); // Ajusta ao mudar a seleção
     });
-
-
 </script>

@@ -12,74 +12,70 @@
 
 <body>
     <header>
-    <nav class="navbar shadow border-body" style="background-color:#010409">
-        <div class="container">
-            <a asp-area="" asp-controller="Home" asp-action="Index">
-                <img src="/images/LOGO.png" width="50px"/>
-            </a>
-            
-            <div class="d-flex justify-content-between">
+        <nav class="navbar shadow border-body" style="background-color:#010409">
+            <div class="container">
+                <a asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="/images/LOGO.png" width="50px" />
+                </a>
 
-                @using Microsoft.AspNetCore.Identity
-                @inject SignInManager<ApplicationUser> SignInManager
-                @inject UserManager<ApplicationUser> UserManager
+                <div class="d-flex justify-content-between">
 
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    var appUser = await UserManager.GetUserAsync(User);
-                    if (User.IsInRole("admin"))
+                    @using Microsoft.AspNetCore.Identity
+                    @inject SignInManager<ApplicationUser> SignInManager
+                    @inject UserManager<ApplicationUser> UserManager
+
+                    @if (SignInManager.IsSignedIn(User))
                     {
-                        <div class="dropdown">
-                            <div class="nav-item dropdown">
+                        var appUser = await UserManager.GetUserAsync(User);
+                        if (User.IsInRole("admin"))
+                        {
+                            <div class="dropdown">
                                 <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     @(appUser!.Nome + "(Admin)")
                                 </a>
-                                <ul class="dropdown-menu">
+                                <ul class="dropdown-menu dropdown-menu-end">
                                     <li><a class="dropdown-item" asp-area="" asp-controller="Users" asp-action="Index">Alunos</a></li>
                                     <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Profile">Perfil</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Sair</a></li>
                                 </ul>
                             </div>
-                        </div>
-                    }
-                    else if (User.IsInRole("aluno"))
-                    {
-                        <ul class="navbar-nav d-flex align-items-center">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        }
+                        else if (User.IsInRole("aluno"))
+                        {
+                            <div class="dropdown">
+                                <a class="nav-link dropdown-toggle me-0 text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     @(appUser!.Nome)
                                 </a>
-                                <ul class="dropdown-menu">
+                                <ul class="dropdown-menu dropdown-menu-end">
                                     <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Profile">Perfil</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Sair</a></li>
                                 </ul>
-                            </li>
-                        </ul>
+                            </div>
+                        }
+                        else
+                        {
+                            <ul class="navbar-nav d-flex align-items-center">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Sair</a></li>
+                            </ul>
+                        }
                     }
                     else
                     {
-                        <ul class="navbar-nav d-flex align-items-center">
-                            <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Sair</a></li>
-                        </ul>
+                        <div class="navbar d-flex">
+                            <div class="nav-item me-2">
+                                <a class="btn btn-primary" asp-area="" asp-controller="Account" asp-action="Register">Registrar</a>
+                            </div>
+                            <div class="nav-item">
+                                <a class="btn btn-success" asp-area="" asp-controller="Account" asp-action="Login">Entrar</a>
+                            </div>
+                        </div>
                     }
-                }
-                else
-                {
-                    <div class="navbar d-flex">
-                        <div class="nav-item me-2">
-                            <a class="btn btn-primary" asp-area="" asp-controller="Account" asp-action="Register">Registrar</a>
-                        </div>
-                        <div class="nav-item">
-                            <a class="btn btn-success" asp-area="" asp-controller="Account" asp-action="Login">Entrar</a>
-                        </div>
-                    </div>
-                }
+                </div>
             </div>
-        </div>
-    </nav>
-</header>
+        </nav>
+    </header>
 
     <div class="container">
         <main role="main" class="pb-3">
