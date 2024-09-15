@@ -1,8 +1,29 @@
-﻿@{
+﻿@inject UserManager<ApplicationUser> UserManager
+@using Microsoft.AspNetCore.Identity
+@{
     ViewData["Title"] = "Home Page";
+
+    var appUser = await UserManager.GetUserAsync(User);
 }
 
 <div class="text-center">
-    <h1 class="display-4">CAMPUS CONNECT</h1>
-    <h6>Desenvolvido por Lucas Woibau</h6>
+    
+    @if(appUser != null)
+    {
+        <h1 class="py-5">Olá @appUser?.Nome !</h1>
+        <img src="~/Images/LOGO.png" alt="Campus Connect" class="img-fluid" />
+    }
+    else
+    {
+        <img src="~/Images/LOGO.png" alt="Campus Connect" class="img-fluid" />
+        <div class="navbar d-flex">
+            <div class="nav-item me-2">
+                <a class="btn btn-primary" asp-area="" asp-controller="Account" asp-action="Register">Registrar</a>
+            </div>
+            <div class="nav-item">
+                <a class="btn btn-success" asp-area="" asp-controller="Account" asp-action="Login">Entrar</a>
+            </div>
+        </div>
+    }
+
 </div>

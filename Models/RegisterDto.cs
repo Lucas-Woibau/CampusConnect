@@ -13,7 +13,7 @@ namespace CampusConnect.Models
         [Phone(ErrorMessage = "O formato do telefone está incorreto"), MaxLength(20)]
         public string Telefone { get; set; } = "";
 
-        [Required(ErrorMessage = "Digite seu email."), EmailAddress, MaxLength(100)]
+        [Required(ErrorMessage = "Digite seu email."), EmailAddress,  MaxLength(100)]
         public string Email { get; set; } = "";
 
         [Required(ErrorMessage = "Digite a cidade mais próxima."), MaxLength(100)]

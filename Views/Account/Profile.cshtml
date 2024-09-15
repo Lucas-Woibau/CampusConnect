@@ -227,9 +227,9 @@
             outraInstituicaoDiv.style.display = 'flex'; // Exibe o campo para "OUTRA"
             novaInstituicaoInput.disabled = false; // Habilita o campo de "Outra Instituição"
         } else {
-            outraInstituicaoDiv.style.display = 'none'; // Esconde o campo
-            novaInstituicaoInput.disabled = true; // Desabilita o campo de "Outra Instituição"
-            novaInstituicaoInput.value = ''; // Limpa o valor do campo
+            outraInstituicaoDiv.style.display = 'none'; 
+            novaInstituicaoInput.disabled = true; 
+            novaInstituicaoInput.value = ''; 
         }
     }
 
@@ -238,7 +238,7 @@
         var instituicaoSelect = document.getElementById('instituicaoSelect');
         var novaInstituicaoInput = document.getElementById('novaInstituicao');
 
-        // Define o valor selecionado do <select> com base na instituição atual
+        // Define o valor selecionado do select com base na instituição atual
         var instituicaoAtual = '@Html.Raw(Model.Instituicao)';
         instituicaoSelect.value = instituicaoAtual;
 
@@ -261,5 +261,19 @@
     var instituicaoSelect = document.getElementById('instituicaoSelect');
     instituicaoSelect.addEventListener('change', function () {
         toggleOutraInstituicao(); // Ajusta ao mudar a seleção
+    });
+
+    // Função para resetar o formulário
+    function resetarFormulario() {
+        var form = document.getElementById('editProfileForm');
+        form.reset(); // Reseta os campos do formulário
+
+        // Esconde o campo "Outra instituição" e limpa seu valor
+        document.getElementById('outraInstituicaoDiv').style.display = 'none';
+        document.getElementById('novaInstituicao').value = '';
+    }
+
+    editProfileModal.addEventListener('hidden.bs.modal', function () {
+        resetarFormulario(); // Reseta o formulário quando o modal é fechado
     });
 </script>

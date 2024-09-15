@@ -70,7 +70,7 @@ namespace CampusConnect.Controllers
 
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError("", error.Description);
+                ModelState.AddModelError("Erro ao cadastrar conta", error.Description);
             }
 
             return View(registerDto);
