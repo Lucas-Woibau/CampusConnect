@@ -170,6 +170,10 @@ namespace CampusConnect.Controllers
             {
                 profileDto.Instituicao = profileDto.NovaInstituicao;
             }
+            else if (profileDto.Instituicao != "OUTRA")
+            {
+                profileDto.NovaInstituicao = ""; // Limpa o valor da outra instituição se não for selecionada
+            }
 
             appUser.Nome = profileDto.Nome;
             appUser.Sobrenome = profileDto.Sobrenome;
@@ -187,15 +191,16 @@ namespace CampusConnect.Controllers
 
             if (result.Succeeded)
             {
-                ViewBag.SuccessMessage = "Perfil atualizado com sucesso";
+                TempData["SuccessMessage"] = "Perfil atualizado com sucesso";
             }
             else
             {
-                ViewBag.ErrorMessage = "Não foi possível atualizar o perfil:" + result.Errors.First().Description;
+                TempData["ErrorMessage"] = "Não foi possível atualizar o perfil: " + result.Errors.First().Description;
             }
 
-            return View(profileDto);
+            return RedirectToAction("Profile");
         }
+
 
         [Authorize]
         public IActionResult Password()

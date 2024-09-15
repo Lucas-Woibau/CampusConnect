@@ -24,7 +24,6 @@ namespace CampusConnect.Models
 
         [Required(ErrorMessage = "Preencha sua instituição."), MaxLength(100)]
         public string Instituicao { get; set; } = "";
-
         public string NovaInstituicao { get; set; } = "";
         public string Matricula { get; set; } = "";
 

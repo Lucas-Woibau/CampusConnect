@@ -13,20 +13,21 @@
         <div class="login-container my-5 p-4 card shadow-lg border border-dark">
             <h2 class="mb-3">Perfil</h2>
 
-            @if (ViewBag.ErrorMessage != null)
+            @if (TempData["ErrorMessage"] != null)
             {
                 <div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                    <strong>@ViewBag.ErrorMessage</strong>
+                    <strong>@TempData["ErrorMessage"]</strong>
                     <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                 </div>
             }
-            else if (ViewBag.SuccessMessage != null)
+            else if (TempData["SuccessMessage"] != null)
             {
                 <div class='alert alert-success alert-dismissible fade show' role='alert'>
-                    <strong>@ViewBag.SuccessMessage</strong>
+                    <strong>@TempData["SuccessMessage"]</strong>
                     <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                 </div>
             }
+
 
             <div class="row mb-2">
                 <div class="col-sm-4">Classe</div>
@@ -93,7 +94,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editProfileModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -101,7 +102,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post">
+                    <form method="post" id="editProfileForm">
                         <div class="row mb-2">
                             <label for="Nome" class="col-sm-4 col-form-label">Primeiro nome</label>
                             <div class="col-sm-8">
@@ -171,7 +172,7 @@
                         <div class="row mb-2" id="outraInstituicaoDiv" style="display:none;">
                             <label for="novaInstituicao" class="col-sm-4 col-form-label">Outra instituição</label>
                             <div class="col-sm-8">
-                                <input type="text" id="novaInstituicao" class="form-control @(ViewData.ModelState["NovaInstituicao"]?.Errors.Count > 0 ? "is-invalid" : "")" asp-for="NovaInstituicao" placeholder="Digite o nome da instituicao">
+                                <input type="text" id="novaInstituicao" id="novaInstituicao" class="form-control" asp-for="NovaInstituicao" placeholder="Digite o nome da instituição">
                                 <span asp-validation-for="NovaInstituicao"></span>
                             </div>
                         </div>
@@ -216,12 +217,52 @@
 </div>
 
 <script>
-    document.getElementById('instituicaoSelect').addEventListener('change', function () {
+    // Função para exibir/ocultar o campo "Outra instituição"
+    function toggleOutraInstituicao() {
+        var instituicaoSelect = document.getElementById('instituicaoSelect');
         var outraInstituicaoDiv = document.getElementById('outraInstituicaoDiv');
-        if (this.value === 'OUTRA') {
-            outraInstituicaoDiv.style.display = '';
+        var novaInstituicaoInput = document.getElementById('novaInstituicao');
+
+        // Verifica a seleção atual e decide se exibe ou oculta o campo "Outra instituição"
+        if (instituicaoSelect.value === 'OUTRA') {
+            outraInstituicaoDiv.style.display = 'flex'; // Exibe o campo para "OUTRA"
+            novaInstituicaoInput.disabled = false; // Habilita o campo de "Outra Instituição"
         } else {
-            outraInstituicaoDiv.style.display = 'none';
+            outraInstituicaoDiv.style.display = 'none'; // Esconde o campo
+            novaInstituicaoInput.disabled = true; // Desabilita o campo de "Outra Instituição"
+            novaInstituicaoInput.value = ''; // Limpa o valor do campo
         }
+    }
+
+    // Função para inicializar o estado do dropdown com base na instituição atual
+    function inicializarInstituicao() {
+        var instituicaoSelect = document.getElementById('instituicaoSelect');
+        var novaInstituicaoInput = document.getElementById('novaInstituicao');
+
+        // Define o valor selecionado do <select> com base na instituição atual
+        var instituicaoAtual = '@Model.Instituicao';
+        instituicaoSelect.value = instituicaoAtual;
+
+        // Se a instituição atual não está entre as opções listadas, seleciona "OUTRA" e mostra o campo adicional
+        if (!['UNESC', 'CASTELO BRANCO', 'IFES', 'SENAI'].includes(instituicaoAtual)) {
+            instituicaoSelect.value = 'OUTRA'; // Seleciona a opção "OUTRA"
+            document.getElementById('outraInstituicaoDiv').style.display = 'flex'; // Mostra o campo "Outra instituição"
+            novaInstituicaoInput.value = instituicaoAtual; // Preenche o campo com o valor da instituição
+        }
+    }
+
+    // Executa a função quando o modal é aberto para inicializar os valores
+    var editProfileModal = document.getElementById('editProfileModal');
+    editProfileModal.addEventListener('show.bs.modal', function () {
+        inicializarInstituicao(); // Configura o estado inicial
+        toggleOutraInstituicao(); // Verifica e ajusta o estado do campo "Outra instituição"
     });
+
+    // Executa a função sempre que o valor do select for alterado
+    var instituicaoSelect = document.getElementById('instituicaoSelect');
+    instituicaoSelect.addEventListener('change', function () {
+        toggleOutraInstituicao(); // Ajusta ao mudar a seleção
+    });
+
+
 </script>
