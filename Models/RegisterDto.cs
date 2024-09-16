@@ -10,13 +10,14 @@ namespace CampusConnect.Models
         [Required(ErrorMessage = "Digite seu sobrenome."), MaxLength(100)]
         public string Sobrenome { get; set; } = "";
 
-        [Phone(ErrorMessage = "O formato do telefone está incorreto"), MaxLength(20)]
+        [Required(ErrorMessage = "Digite seu telefone."), MaxLength(20)]
+        [RegularExpression(@"\(?\d{2}\)?\s?\d{4,5}-?\d{4}", ErrorMessage = "Insira um telefone válido no formato (XX) XXXXX-XXXX")]
         public string Telefone { get; set; } = "";
 
         [Required(ErrorMessage = "Digite seu email."), EmailAddress,  MaxLength(100)]
         public string Email { get; set; } = "";
 
-        [Required(ErrorMessage = "Digite a cidade mais próxima."), MaxLength(100)]
+        [Required(ErrorMessage = "Selecione a cidade.\nCaso não more em nehuma das opções, selecione a cidade mais próxima."), MaxLength(100)]
         public string Cidade { get; set; } = "";
 
         [Required(ErrorMessage = "Escolha a rota."), MaxLength(100)]
@@ -32,6 +33,7 @@ namespace CampusConnect.Models
         [Required(ErrorMessage = "Digite o seu curso."), MaxLength(100)]
         public string Curso { get; set; } = "";
 
+        [RegularExpression(@"\d+/\d+", ErrorMessage = "Insira um período no formato X/X")]
         public string Periodo { get; set; } = "";
 
         [Required, MaxLength(100)]

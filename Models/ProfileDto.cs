@@ -10,7 +10,9 @@ namespace CampusConnect.Models
         [Required(ErrorMessage = "Preencha seu sobrenome."), MaxLength(100)]
         public string Sobrenome { get; set; } = "";
 
-        [Phone(ErrorMessage = "O formato do telefone está incorreto."), MaxLength(20)]
+
+        [Required(ErrorMessage = "Digite seu telefone."), MaxLength(20)]
+        [RegularExpression(@"\(?\d{2}\)?\s?\d{4,5}-?\d{4}", ErrorMessage = "Insira um telefone válido no formato (XX) XXXXX-XXXX")]
         public string Telefone { get; set; } = "";
 
         [Required (ErrorMessage = "Preencha seu email."), EmailAddress, MaxLength(100)]
@@ -30,6 +32,7 @@ namespace CampusConnect.Models
         [Required(ErrorMessage = "Preencha seu curso."), MaxLength(100)]
         public string Curso { get; set; } = "";
 
+        [RegularExpression(@"\d+/\d+", ErrorMessage = "Insira um período no formato X/X")]
         public string Periodo { get; set; } = "";
     }
 }

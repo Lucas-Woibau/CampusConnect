@@ -20,3 +20,26 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.chart-wrapper {
+    position: relative;
+    width: 100%;
+    height: auto; 
+}
+
+#instituicaoChart {
+    width: 100% !important;
+    height: 400px; 
+}
+
+@media (max-width: 869px) {
+    #instituicaoChart {
+        height: 300px;
+    }
+}
+
+@media (max-width: 576px) {
+    #instituicaoChart {
+        height: 250px; 
+    }
+}
