@@ -90,7 +90,7 @@
                                         <option value="OUTRA">OUTRA</option>
                                     </select>
                                     <div class="invalid-feedback">
-                                        <span asp-validation-for="Instituicao"></span>
+                                        <span asp-validation-for="Instituicao.ToUpper()"></span>
                                     </div>
                                 </div>
                             </div>
@@ -100,7 +100,7 @@
                                     <label for="Instituicao" class="form-label">Nome da instituição</label>
                                     <input id="novaInstituicao" class="form-control @(ViewData.ModelState["NovaInstituicao"]?.Errors.Count > 0 ? "is-invalid" : "")" asp-for="NovaInstituicao" placeholder="Digite o nome da instituicao">
                                     <div class="invalid-feedback">
-                                        <span asp-validation-for="NovaInstituicao"></span>
+                                        <span asp-validation-for="NovaInstituicao.ToUpper()"></span>
                                     </div>
                                 </div>
                             </div>
