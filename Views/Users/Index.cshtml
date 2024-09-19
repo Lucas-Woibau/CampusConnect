@@ -9,7 +9,7 @@
     var instituicoesPadrao = new[] { "UNESC", "CASTELO BRANCO", "IFES", "SENAI" };
 }
 
-<div class="container mt-4 w-100">
+<div class="container mt-4 w-100 shadow-lg p-1 px-3">
 
     <h2 class="text-center mb-5">Lista de Alunos</h2>
     <form>
@@ -45,7 +45,7 @@
                     </select>
                 </div>
                 <div class="d-flex ms-md-auto" role="search">
-                    <input class="form-control me-2" type="search" name="search" asp-for="Search" placeholder="Pesquisar" aria-label="Search">
+                    <input id="inputSearch" class="form-control me-2" type="search" name="search" asp-for="Search" placeholder="Pesquisar" aria-label="Search">
                     <button class="btn btn-success" type="submit">Pesquisar</button>
                 </div>
             </div>
@@ -93,56 +93,56 @@
 
                 <!-- Modal details -->
                 <div class="modal fade" id="detailsModal-@user.Id" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Detalhes da conta: @user.Nome @user.Sobrenome</h5>
+                                <h5 class="modal-title">Detalhes da conta:<br /> <strong>@user.Nome @user.Sobrenome</strong></h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <div class="row mb-2">
-                                    <div class="col-sm-4">Nome</div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-4 font-weight-bold">Nome</div>
                                     <div class="col-sm-8">@user.Nome</div>
                                 </div>
-                                <div class="row mb-2">
-                                    <div class="col-sm-4">Sobrenome</div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-4 font-weight-bold">Sobrenome</div>
                                     <div class="col-sm-8">@user.Sobrenome</div>
                                 </div>
-                                <div class="row mb-2">
-                                    <div class="col-sm-4">Telefone</div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-4 font-weight-bold">Telefone</div>
                                     <div class="col-sm-8">@user.PhoneNumber</div>
                                 </div>
-                                <div class="row mb-2">
-                                    <div class="col-sm-4">Cidade</div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-4 font-weight-bold">Cidade</div>
                                     <div class="col-sm-8">@user.Cidade</div>
                                 </div>
-                                <div class="row mb-2">
-                                    <div class="col-sm-4">Rota</div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-4 font-weight-bold">Rota</div>
                                     <div class="col-sm-8">@user.Rota</div>
                                 </div>
-                                <div class="row mb-2">
-                                    <div class="col-sm-4">Instituição</div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-4 font-weight-bold">Instituição</div>
                                     <div class="col-sm-8">@user.Instituicao.ToUpper()</div>
                                 </div>
-                                <div class="row mb-2">
-                                    <div class="col-sm-4">Curso</div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-4 font-weight-bold">Curso</div>
                                     <div class="col-sm-8">@user.Curso</div>
                                 </div>
-                                <div class="row mb-2">
-                                    <div class="col-sm-4">Matrícula</div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-4 font-weight-bold">Matrícula</div>
                                     <div class="col-sm-8">@user.Matricula</div>
                                 </div>
-                                <div class="row mb-2">
-                                    <div class="col-sm-4">Período</div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-4 font-weight-bold">Período</div>
                                     <div class="col-sm-8">@user.Periodo</div>
                                 </div>
-                                <div class="row mb-2">
-                                    <div class="col-sm-4">Email</div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-4 font-weight-bold">Email</div>
                                     <div class="col-sm-8">@user.Email</div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                             </div>
                         </div>
                     </div>
@@ -150,16 +150,15 @@
 
                 <!-- Modal delete -->
                 <div class="modal fade" id="deleteModal-@user.Id" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Deletar conta</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                </button>
+                                <h5 class="modal-title">Deletar Conta</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <strong>Conta: @user.Nome @user.Sobrenome</strong>
-                                <p>Tem certeza que deseja deletar essa conta?</p>
+                                <strong>@user.Nome @user.Sobrenome</strong>
+                                <p>Tem certeza que deseja deletar esta conta? Esta ação não pode ser desfeita.</p>
                             </div>
                             <div class="modal-footer">
                                 <a class="btn btn-danger" role="button" asp-controller="Users" asp-action="DeleteAccount" asp-route-id="@user.Id">
@@ -170,6 +169,7 @@
                         </div>
                     </div>
                 </div>
+
             }
         </tbody>
     </table>
@@ -186,3 +186,5 @@
         </ul>
     </nav>
 </div>
+
+

@@ -41,7 +41,7 @@ namespace CampusConnect.Controllers
             }
             if (registerDto.Instituicao == "OUTRA" && !string.IsNullOrEmpty(registerDto.NovaInstituicao))
             {
-                registerDto.Instituicao = registerDto.NovaInstituicao;
+                registerDto.Instituicao = registerDto.NovaInstituicao.ToUpper();
             }
             var user = new ApplicationUser()
             {
@@ -52,7 +52,7 @@ namespace CampusConnect.Controllers
                 PhoneNumber = registerDto.Telefone,
                 Cidade = registerDto.Cidade,
                 Rota = registerDto.Rota,
-                Instituicao = registerDto.Instituicao,
+                Instituicao = registerDto.Instituicao.ToUpper(),
                 Curso = registerDto.Curso,
                 Matricula = registerDto.Matricula,
                 Periodo = registerDto.Periodo,
@@ -140,7 +140,7 @@ namespace CampusConnect.Controllers
                 Telefone = appUser.PhoneNumber ?? "",
                 Cidade = appUser.Cidade,
                 Rota = appUser.Rota,
-                Instituicao = appUser.Instituicao,
+                Instituicao = appUser.Instituicao.ToUpper(),
                 Curso = appUser.Curso,
                 Matricula = appUser.Matricula,
                 Periodo = appUser.Periodo,
@@ -181,7 +181,7 @@ namespace CampusConnect.Controllers
             appUser.Email = profileDto.Email;
             appUser.PhoneNumber = profileDto.Telefone;
             appUser.Cidade = profileDto.Cidade;
-            appUser.Instituicao = profileDto.Instituicao;
+            appUser.Instituicao = profileDto.Instituicao.ToUpper();
             appUser.Rota = profileDto.Rota;
             appUser.Curso = profileDto.Curso;
             appUser.Matricula = profileDto.Matricula;

@@ -60,7 +60,7 @@ namespace CampusConnect.Controllers
 
             ViewBag.PageIndex = pageIndex;
             ViewBag.TotalPages = totalPages;
-            ViewBag.Search = search;
+            ViewBag.Search = string.IsNullOrEmpty(search) ? "" : search; 
 
             var SearchUsers = new SearchUsers()
             {
@@ -75,7 +75,19 @@ namespace CampusConnect.Controllers
                 .Distinct()
                 .ToList();
 
+            var todasAsRotas = _userManager.Users
+                .Select(u => u.Rota)
+                .Distinct()
+                .ToList();
+
+            var todasAsCidades = _userManager.Users
+                .Select(u => u.Cidade)
+                .Distinct()
+                .ToList();
+
             ViewData["Instituicoes"] = todasInstituicoes;
+            ViewData["Rotas"] = todasAsRotas;
+            ViewData["Cidades"] = todasAsCidades;
 
             return View(SearchUsers);
         }

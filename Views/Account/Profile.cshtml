@@ -11,7 +11,9 @@
 <div class="row justify-content-center">
     <div class="col-md-4">
         <div class="login-container my-5 p-4 card shadow-lg border border-dark">
-            <h2 class="mb-3">Perfil</h2>
+            <h2 class="mb-3">Dados do perfil</h2>
+
+            <hr />
 
             @if (TempData["ErrorMessage"] != null)
             {
@@ -27,12 +29,6 @@
                     <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                 </div>
             }
-
-            <div class="row mb-2">
-                <div class="col-sm-4">Classe</div>
-                <div class="col-sm-8">@userRole</div>
-            </div>
-            <hr />
             <div class="row mb-2">
                 <div class="col-sm-4">Primeiro nome</div>
                 <div class="col-sm-8">@appUser?.Nome</div>
@@ -85,15 +81,16 @@
 
             <hr />
 
-            <div>
-                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editProfileModal">Alterar perfil</button>
+            <div class="d-flex justify-content-start">
+                <button type="button" class="btn btn-success btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editProfileModal">Alterar perfil</button>
                 <a class="btn btn-warning btn-sm" asp-controller="Account" asp-action="Password">Alterar senha</a>
             </div>
+
         </div>
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="editProfileModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+    <div class="modal fade shadow-lg" id="editProfileModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -147,7 +144,7 @@
                             <div class="col-sm-8">
                                 <select class="form-select" asp-for="Rota" aria-label="">
                                     <option value="UNESC">UNESC</option>
-                                    <option value="CASTELO BRANCO/IFES">CASTELO BRANCO/IFES</option>
+                                    <option value="CASTELO/CENTRO/IFES">CASTELO/CENTRO/IFES</option>
                                 </select>
                                 <span asp-validation-for="Rota" class="text-danger"></span>
                             </div>
@@ -200,15 +197,14 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="offset-sm-4 col-sm-8 d-grid">
+                        <div class="modal-footer">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                 <button type="submit" class="btn btn-primary">Alterar</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                             </div>
                         </div>
+
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>

@@ -11,18 +11,14 @@
             @if (appUser != null)
             {
                 <h3 class="py-3">Olá @appUser?.Nome!</h3>
-                <div class="container-fluid mt-4">
+                <div class="container-fluid mt-4 shadow-lg">
+                    <h5 class="mb-0">Total de alunos: <strong>@ViewBag.TotalUsers</strong></h5>
                     <div class="d-flex justify-content-center">
-                        <div class="chart-wrapper w-100" style="max-width: 800px;">
-                            <canvas id="instituicaoChart" class="w-100"></canvas>
+                        <div class="chart-wrapper w-100" style="max-width: 800px;">                            
+                            <canvas id="instituicaoChart" class="w-100" a></canvas>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-center pt-2 align-items-center">
-                        <h5 class="mb-0">Total de alunos cadastrados:&nbsp;</h5>
-                        <h1 class="mb-0">@ViewBag.TotalUsers</h1>
-                    </div>
                 </div>
-
             }
             else
             {

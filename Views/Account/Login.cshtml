@@ -2,63 +2,73 @@
 @{
 }
 
-<div class="row justify-content-center">
-    <div class="col-md-4">
-        <div class="login-container my-5 p-4 card shadow-lg border border-dark">
-            <h2 class="text-center mb-3">Entrar</h2>
-
-            @if (ViewBag.ErrorMessage != null)
-            {
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>@ViewBag.ErrorMessage</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="login-container p-4 card shadow-lg border border-dark">
+                <!-- Logo no topo -->
+                <div class="text-center mb-4">
+                    <img src="~/Images/LOGO.png" alt="Campus Connect" class="img-fluid logo-img" />
                 </div>
-            }
 
-            <form method="post">
-                <div class="mb-3">
-                    <label for="Email" class="form-label">Email</label>
-                    <input class="form-control @(ViewData.ModelState["Email"]?.Errors.Count > 0 ? "is-invalid" : "")" asp-for="Email" placeholder="Digite seu email">
-                    <div class="invalid-feedback">
-                        <span asp-validation-for="Email"></span>
+                @if (ViewBag.ErrorMessage != null)
+                {
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>@ViewBag.ErrorMessage</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                </div>
+                }
 
-                <div class="mb-3">
-                    <label for="Senha" class="form-label">Senha</label>
-                    <input name="Senha" class="form-control @(ViewData.ModelState["Senha"]?.Errors.Count > 0 ? "is-invalid" : "")" type="password" asp-for="Senha" placeholder="Digite sua senha">
-                    <div class="invalid-feedback">
-                        <span asp-validation-for="Senha"></span>
-                    </div>
-                </div>
-
-                <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" id="lembrarCheck" asp-for="LembrarDeMim" />
-                    <label class="form-check-label" for="lembrarCheck">Manter conectado</label>
-                </div>
-
-                <div class="d-flex flex-column mb-3">
-                    <div class="mb-2">
-                        <button type="submit" class="btn btn-success w-100">Entrar</button>
+                <!-- Formulário -->
+                <form method="post">
+                    <div class="mb-3">
+                        <label for="Email" class="form-label">Email</label>
+                        <input class="form-control @(ViewData.ModelState["Email"]?.Errors.Count > 0 ? "is-invalid" : "")" asp-for="Email" placeholder="Digite seu email">
+                        <div class="invalid-feedback">
+                            <span asp-validation-for="Email"></span>
+                        </div>
                     </div>
 
-                    <div class="text-center my-3">
+                    <div class="mb-3">
+                        <label for="Senha" class="form-label">Senha</label>
+                        <input name="Senha" class="form-control @(ViewData.ModelState["Senha"]?.Errors.Count > 0 ? "is-invalid" : "")" type="password" asp-for="Senha" placeholder="Digite sua senha">
+                        <div class="invalid-feedback">
+                            <span asp-validation-for="Senha"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="lembrarCheck" asp-for="LembrarDeMim" />
+                        <label class="form-check-label" for="lembrarCheck">Manter conectado</label>
+                    </div>
+
+                    <div class="d-flex flex-column mb-3">
+                        <button type="submit" class="btn btn-success w-100 mb-2">Entrar</button>
+                        <a class="btn btn-primary w-100" asp-controller="Account" asp-action="Register" role="button">Registrar</a>
+                    </div>
+
+                    <div class="text-center mb-3">
                         <span>Ainda não possui uma conta?</span>
                     </div>
 
-                    <div>
-                        <a class="btn btn-primary border w-100" asp-controller="Account" asp-action="Register" role="button">
-                            Registrar
-                        </a>
+                    <div class="text-center">
+                        <a class="link" asp-controller="Account" asp-action="ForgotPassword" style="text-decoration:none">Esqueceu a sua senha?</a>
                     </div>
-                </div>
-
-                <div class="text-left">
-                    <a class="link" asp-controller="Account" asp-action="ForgotPassword" style="text-decoration:none">
-                        Esqueceu a sua senha?
-                    </a>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>
+
+<style>
+    .logo-img {
+        width: 100%; /* Ajusta a largura da imagem para 100% do contêiner pai */
+        max-width: 200px; /* Define uma largura máxima para a imagem */
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
