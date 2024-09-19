@@ -101,6 +101,15 @@
                             </div>
                             <div class="modal-body">
                                 <div class="row mb-3">
+                                    <div class="col-sm-4 font-weight-bold">Classe:</div>
+                                    <div class="col-sm-8 d-flex align-items-center">
+                                        <span class="me-2">@ViewBag.UserRoles[user.Id]</span>
+                                        <button type="button" class="btn btn-link p-0 m-0" style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#roleModal">
+                                            Editar
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
                                     <div class="col-sm-4 font-weight-bold">Nome</div>
                                     <div class="col-sm-8">@user.Nome</div>
                                 </div>
@@ -143,6 +152,31 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="roleModal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Edit User Role</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="get" asp-controller="User" asp-action="EditRole">
+                                    <input type="hidden" value="@user.Id" name="id" />
+                                    <label>Select user role</label>
+                                    <select class="form-select mb-2" name="newRole" asp-items="@ViewBag.SelectItems">
+                                    </select>
+
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>

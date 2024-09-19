@@ -21,7 +21,7 @@ namespace CampusConnect.Controllers
             _roleManager = roleManager;
         }
 
-        public IActionResult Index(int? pageIndex, string? search, string? rota, string? cidade, string? instituicao)
+        public async Task<IActionResult> Index(int? pageIndex, string? search, string? rota, string? cidade, string? instituicao)
         {
             IQueryable<ApplicationUser> query = _userManager.Users;
 
@@ -89,42 +89,17 @@ namespace CampusConnect.Controllers
             ViewData["Rotas"] = todasAsRotas;
             ViewData["Cidades"] = todasAsCidades;
 
+            var userRoles = new Dictionary<string, string>();
+
+            foreach (var user in users)
+            {
+                var roles = await _userManager.GetRolesAsync(user);
+                userRoles[user.Id] = roles.FirstOrDefault() ?? "Nenhuma role atribuída"; 
+            }
+
+            ViewBag.UserRoles = userRoles;
+
             return View(SearchUsers);
-        }
-
-        public async Task<IActionResult> Details(string? id)
-        {
-            if (id == null)
-            {
-                return RedirectToAction("Index", "Users");
-            }
-
-            var appUser = await _userManager.FindByIdAsync(id);
-
-            if (appUser == null)
-            {
-                return RedirectToAction("Index", "Users");
-            }
-
-            ViewBag.Roles = await _userManager.GetRolesAsync(appUser);
-
-            // Get available roles
-            var availableRoles = _roleManager.Roles.ToList();
-            var items = new List<SelectListItem>();
-            foreach (var role in availableRoles)
-            {
-                items.Add(
-                    new SelectListItem
-                    {
-                        Text = role.NormalizedName,
-                        Value = role.Name,
-                        Selected = await _userManager.IsInRoleAsync(appUser, role.Name!),
-                    });
-            }
-
-            ViewBag.SelectItems = items;
-
-            return View(appUser);
         }
 
         public async Task<IActionResult> EditRole(string? id, string? newRole)
@@ -146,7 +121,7 @@ namespace CampusConnect.Controllers
             if (currentUser!.Id == appUser.Id)
             {
                 TempData["ErrorMessage"] = "You cannot update your own role!";
-                return RedirectToAction("Details", "Users", new { id });
+                return RedirectToAction("Index", "Users", new { id });
             }
 
             // Update user role
@@ -155,7 +130,7 @@ namespace CampusConnect.Controllers
             await _userManager.AddToRoleAsync(appUser, newRole);
 
             TempData["SuccessMessage"] = "User Role updated successfully";
-            return RedirectToAction("Details", "Users", new { id });
+            return RedirectToAction("Index", "Users", new { id });
         }
 
         public async Task<IActionResult> DeleteAccount(string? id)
