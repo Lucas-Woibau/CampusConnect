@@ -166,12 +166,9 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form method="get" asp-controller="User" asp-action="EditRole">
-                                    <input type="hidden" value="@user.Id" name="id" />
-                                    <label>Select user role</label>
-                                    <select class="form-select mb-2" name="newRole" asp-items="@ViewBag.SelectItems">
+                                <form method="get" asp-controller="Users" asp-action="EditRole">
+                                    <select class="form-select mb-2" name="newRole" asp-items="@(new SelectList(ViewBag.AllRoles, "Value", "Text"))">
                                     </select>
-
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>

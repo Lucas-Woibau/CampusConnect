@@ -60,7 +60,7 @@ namespace CampusConnect.Controllers
 
             ViewBag.PageIndex = pageIndex;
             ViewBag.TotalPages = totalPages;
-            ViewBag.Search = string.IsNullOrEmpty(search) ? "" : search; 
+            ViewBag.Search = string.IsNullOrEmpty(search) ? "" : search;
 
             var SearchUsers = new SearchUsers()
             {
@@ -70,33 +70,30 @@ namespace CampusConnect.Controllers
                 Instituicao = instituicao,
             };
 
-            var todasInstituicoes = _userManager.Users
-                .Select(u => u.Instituicao)
-                .Distinct()
-                .ToList();
-
-            var todasAsRotas = _userManager.Users
-                .Select(u => u.Rota)
-                .Distinct()
-                .ToList();
-
-            var todasAsCidades = _userManager.Users
-                .Select(u => u.Cidade)
-                .Distinct()
-                .ToList();
+            var todasInstituicoes = _userManager.Users.Select(u => u.Instituicao).Distinct().ToList();
+            var todasAsRotas = _userManager.Users.Select(u => u.Rota).Distinct().ToList();
+            var todasAsCidades = _userManager.Users.Select(u => u.Cidade).Distinct().ToList();
 
             ViewData["Instituicoes"] = todasInstituicoes;
             ViewData["Rotas"] = todasAsRotas;
             ViewData["Cidades"] = todasAsCidades;
 
-            var userRoles = new Dictionary<string, string>();
+            var allRoles = _roleManager.Roles
+                .Select(r => new SelectListItem
+                {
+                    Value = r.Name, // Definindo o nome da role como o valor
+                    Text = r.Name   // Definindo o nome da role como o texto exibido
+                })
+                .Distinct()
+                .ToList();
+            ViewBag.AllRoles = allRoles;
 
+            var userRoles = new Dictionary<string, string>();
             foreach (var user in users)
             {
                 var roles = await _userManager.GetRolesAsync(user);
-                userRoles[user.Id] = roles.FirstOrDefault() ?? "Nenhuma role atribuída"; 
+                userRoles[user.Id] = roles.FirstOrDefault() ?? "Nenhuma classe atribuída";
             }
-
             ViewBag.UserRoles = userRoles;
 
             return View(SearchUsers);
@@ -124,7 +121,6 @@ namespace CampusConnect.Controllers
                 return RedirectToAction("Index", "Users", new { id });
             }
 
-            // Update user role
             var userRoles = await _userManager.GetRolesAsync(appUser);
             await _userManager.RemoveFromRolesAsync(appUser, userRoles);
             await _userManager.AddToRoleAsync(appUser, newRole);
