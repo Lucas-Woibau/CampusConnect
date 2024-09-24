@@ -17,7 +17,7 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
-                                    <label for="Nome" class="form-label">Primeiro Nome</label>
+                                    <label for="Nome" class="form-label">Nome</label>
                                     <input class="form-control @(ViewData.ModelState["Nome"]?.Errors.Count > 0 ? "is-invalid" : "")" asp-for="Nome" placeholder="Digite seu primeiro nome">
                                     <div class="invalid-feedback">
                                         <span asp-validation-for="Nome"></span>

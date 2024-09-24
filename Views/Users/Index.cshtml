@@ -16,18 +16,7 @@
         <div class="input-group flex-nowrap mb-3">
             <div class="d-flex flex-column flex-md-row w-100">
                 <div class="d-flex flex-column flex-sm-row mb-2 mb-md-0">
-                    <select class="form-select me-0 me-sm-2 mb-2 mb-sm-0" asp-for="Rota" onchange="this.form.submit()">
-                        <option value="">Todas as rotas</option>
-                        <option value="UNESC">UNESC</option>
-                        <option value="CASTELO/CENTRO/IFES">CASTELO/CENTRO/IFES</option>
-                    </select>
-                    <select class="form-select me-0 me-sm-2 mb-2 mb-sm-0" asp-for="Cidade" onchange="this.form.submit()">
-                        <option value="">Todas as cidades</option>
-                        <option value="PANCAS">PANCAS</option>
-                        <option value="LAGINHA">LAGINHA</option>
-                        <option value="VILA VERDE">VILA VERDE</option>
-                    </select>
-                    <select class="form-select" asp-for="Instituicao" onchange="this.form.submit()">
+                    <select class="form-select me-0 me-sm-2 mb-2 mb-sm-0" asp-for="Instituicao" onchange="this.form.submit()">
                         <option value="">Todas as instituições</option>
 
                         @foreach (var instituicao in instituicoesPadrao)
@@ -42,6 +31,17 @@
                                 <option value="@instituicao">@instituicao.ToUpper()</option>
                             }
                         }
+                    </select>
+                    <select class="form-select me-0 me-sm-2 mb-2 mb-sm-0" asp-for="Cidade" onchange="this.form.submit()">
+                        <option value="">Todas as cidades</option>
+                        <option value="PANCAS">PANCAS</option>
+                        <option value="LAGINHA">LAGINHA</option>
+                        <option value="VILA VERDE">VILA VERDE</option>
+                    </select>
+                    <select class="form-select me-0 me-sm-2 mb-2 mb-sm-0" asp-for="Rota" onchange="this.form.submit()">
+                        <option value="">Todas as rotas</option>
+                        <option value="UNESC">UNESC</option>
+                        <option value="CASTELO/CENTRO/IFES">CASTELO/CENTRO/IFES</option>
                     </select>
                 </div>
                 <div class="d-flex ms-md-auto" role="search">
@@ -104,7 +104,7 @@
                                     <div class="col-sm-4 font-weight-bold">Classe:</div>
                                     <div class="col-sm-8 d-flex align-items-center">
                                         <span class="me-2">@ViewBag.UserRoles[user.Id]</span>
-                                        <button type="button" class="btn btn-link p-0 m-0" style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#roleModal">
+                                        <button type="button" class="btn btn-link p-0 m-0" style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#roleModal-@user.Id">
                                             Editar
                                         </button>
                                     </div>
@@ -157,19 +157,22 @@
                     </div>
                 </div>
 
-                <div class="modal fade" id="roleModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal fade" id="roleModal-@user.Id" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Edit User Role</h5>
+                                <h5 class="modal-title">Editar classe</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form method="get" asp-controller="Users" asp-action="EditRole">
+                                <form method="post" asp-controller="Users" asp-action="EditRole">
+                                    <input type="hidden" value="@user.Id" name="id" />
+                                    <label>Selecione uma nova classe</label>
                                     <select class="form-select mb-2" name="newRole" asp-items="@(new SelectList(ViewBag.AllRoles, "Value", "Text"))">
                                     </select>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                                    <button type="submit" class="btn btn-primary">Salvar</button>
                                 </form>
                             </div>
                             <div class="modal-footer">
@@ -200,7 +203,6 @@
                         </div>
                     </div>
                 </div>
-
             }
         </tbody>
     </table>
