@@ -134,9 +134,16 @@
                         <div class="row mb-2">
                             <label for="Cidade" class="col-sm-4 col-form-label">Cidade</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="Cidade" asp-for="Cidade" />
-                                <span asp-validation-for="Cidade" class="text-danger"></span>
-                            </div>
+                                <select class="form-select @(ViewData.ModelState["Cidade"]?.Errors.Count > 0 ? "is-invalid" : "")" asp-for="Cidade">
+                                    <option value="">Selecione a cidade</option>
+                                    <option value="PANCAS">PANCAS</option>
+                                    <option value="LAGINHA">LAGINHA</option>
+                                    <option value="VILA VERDE">VILA VERDE</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    <span asp-validation-for="Cidade"></span>
+                                </div>
+                            </div>                              
                         </div>
 
                         <div class="row mb-2">

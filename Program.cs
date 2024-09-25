@@ -10,7 +10,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     var conn = builder.Configuration.GetConnectionString("Default");
-    options.UseSqlServer(conn);
+    options.UseMySql(conn, ServerVersion.AutoDetect(conn));
 });
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>

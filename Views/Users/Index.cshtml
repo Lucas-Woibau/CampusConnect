@@ -52,13 +52,12 @@
         </div>
     </form>
 
-    <table class="table table-striped-sm" style="width:100%">
+    <table class="table table-striped-sm w-100">
         <thead class="shadow-sm">
             <tr>
                 <th>NOME</th>
-                <th>INSTITUIÇÃO</th>
+                <th class="d-none d-md-table-cell">INSTITUIÇÃO</th>
                 <th class="d-none d-md-table-cell">CIDADE</th>
-                <th class="d-none d-md-table-cell">CURSO</th>
                 <th class="d-none d-md-table-cell">TELEFONE</th>
                 <th class="d-none d-md-table-cell">EMAIL</th>
                 <th style="width:5px"></th>
@@ -68,16 +67,36 @@
             @foreach (var user in ViewBag.Users)
             {
                 <tr>
-                    <td>@(user.Nome + " " + user.Sobrenome)</td>
-                    <td>@user.Instituicao.ToUpper()</td>
-                    <td class="d-none d-md-table-cell">@user.Cidade</td>
-                    <td class="d-none d-md-table-cell">@user.Curso</td>
-                    <td class="d-none d-md-table-cell">@user.PhoneNumber</td>
-                    <td class="d-none d-md-table-cell">@user.Email</td>
-
                     <td>
-                        <!-- Botão Detalhes e Deletar -->
-                        <div class="d-flex">
+                        <!-- Nome e instituição aparecem no mobile -->
+                        <div class="d-flex flex-column">
+                            <!-- Nome para mobile -->
+                            <span class="fw-bold fs-5 d-md-none">@user.Nome @user.Sobrenome</span>
+
+                            <!-- Nome para desktop -->
+                            <span class="d-none d-md-block">@user.Nome @user.Sobrenome</span>
+
+                            <!-- Instituição, cidade e curso no mobile -->
+                            <div class="d-md-none text-muted small">
+                                <span>@user.Instituicao.ToUpper()</span>,
+                                <span>@user.Cidade</span>,
+                                <span>@user.Curso</span>
+                            </div>
+                        </div>
+                    </td>
+
+                    <!-- Instituição para desktop -->
+                    <td class="d-none d-md-table-cell align-middle">@user.Instituicao.ToUpper()</td>
+                    <!-- Cidade para desktop -->
+                    <td class="d-none d-md-table-cell align-middle">@user.Cidade</td>
+                    <!-- Telefone para desktop -->
+                    <td class="d-none d-md-table-cell align-middle">@user.PhoneNumber</td>
+                    <!-- Email para desktop -->
+                    <td class="d-none d-md-table-cell align-middle">@user.Email</td>
+
+                    <!-- Botões de info e delete -->
+                    <td class="align-middle text-end">
+                        <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal"
                                     data-bs-target="#detailsModal-@user.Id">
                                 <i class="fa-solid fa-circle-info"></i>

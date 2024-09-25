@@ -43,7 +43,7 @@
                         <option value="CASTELO/CENTRO/IFES">CASTELO/CENTRO/IFES</option>
                     </select>
                 </div>
-                <div class="d-flex align-items-center ms-3">
+                <div class="d-flex align-items-center justify-content-center">
                     <div class="form-check form-switch me-5">
                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckDisabled" disabled>
                         <label class="form-check-label" for="flexSwitchCheckDisabled">FALTA</label>
@@ -60,13 +60,13 @@
         <input type="hidden" name="rota" value="@Model.Rota" />
         <input type="hidden" name="cidade" value="@Model.Cidade" />
         <input type="hidden" name="instituicao" value="@Model.Instituicao" />
-        <table class="table table-striped-sm" style="width:100%">
+
+        <table class="table table-striped-sm w-100">
             <thead class="shadow-sm">
                 <tr>
                     <th>Nome</th>
-                    <th>Instituição</th>
+                    <th class="d-none d-md-table-cell">Instituição</th>
                     <th class="d-none d-md-table-cell">Cidade</th>
-                    <th class="d-none d-md-table-cell">Curso</th>
                     <th class="d-none d-md-table-cell">Telefone</th>
                     <th class="d-none d-md-table-cell">Email</th>
                     <th style="width:5px"></th>
@@ -77,14 +77,25 @@
                 {
                     var user = ViewBag.Users[i];
                     <tr>
-                        <td>@(user.Nome + " " + user.Sobrenome)</td>
-                        <td>@user.Instituicao.ToUpper()</td>
-                        <td class="d-none d-md-table-cell">@user.Cidade</td>
-                        <td class="d-none d-md-table-cell">@user.Curso</td>
-                        <td class="d-none d-md-table-cell">@user.PhoneNumber</td>
-                        <td class="d-none d-md-table-cell">@user.Email</td>
                         <td>
-                            <div class="form-check form-switch">
+                            <div class="d-flex flex-column">
+                                <span class="fw-bold fs-5">@user.Nome @user.Sobrenome</span>
+
+                                <div class="d-md-none text-muted small">
+                                    <span>@user.Instituicao.ToUpper()</span> |
+                                    <span>@user.Cidade</span> |
+                                    <span>@user.Curso</span>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td class="d-none d-md-table-cell align-middle">@user.Instituicao.ToUpper()</td>
+                        <td class="d-none d-md-table-cell align-middle">@user.Cidade</td>
+                        <td class="d-none d-md-table-cell align-middle">@user.PhoneNumber</td>
+                        <td class="d-none d-md-table-cell align-middle">@user.Email</td>
+
+                        <td class="align-middle text-center">
+                            <div class="form-check form-switch d-flex align-items-center justify-content-center">
                                 <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault_@user.Id" onchange="updateHiddenField(@i)">
                                 <input type="hidden" name="attendanceList[@i].Presente" value="false" />
                                 <input type="hidden" name="attendanceList[@i].Nome" value="@user.Nome" />
@@ -99,10 +110,9 @@
                 }
             </tbody>
         </table>
-        <div class="d-flex justify-content-center align-items-center mb-2 w-100">
-            <button class="btn btn-success" type="submit">Gerar relatório</button>
-        </div>
     </form>
+
+
 </div>
 
 <script>

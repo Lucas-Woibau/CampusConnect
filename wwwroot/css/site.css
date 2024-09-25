@@ -1,10 +1,10 @@
 html {
-  font-size: 14px;
+  font-size: 15px;
 }
 
-@media (min-width: 869px) {
+@media (max-width: 869px) {
   html {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 
