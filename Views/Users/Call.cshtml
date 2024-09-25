@@ -10,8 +10,7 @@
 }
 
 <div class="container mt-4 w-100 shadow-lg p-1 px-3">
-
-    <h2 class="text-center mb-5">Fazer chamada</h2>
+    <h2 class="text-center mb-5">CHAMADA</h2>
     <form>
         <div class="input-group flex-nowrap mb-3">
             <div class="d-flex flex-column flex-md-row w-100">
@@ -44,10 +43,19 @@
                         <option value="CASTELO/CENTRO/IFES">CASTELO/CENTRO/IFES</option>
                     </select>
                 </div>
+                <div class="d-flex align-items-center ms-3">
+                    <div class="form-check form-switch me-5">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDisabled" disabled>
+                        <label class="form-check-label" for="flexSwitchCheckDisabled">FALTA</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckCheckedDisabled" checked disabled>
+                        <label class="form-check-label" for="flexSwitchCheckCheckedDisabled">PRESENÇA</label>
+                    </div>
+                </div>
             </div>
         </div>
     </form>
-
     <form method="post" action="/Report/GenerateReport">
         <input type="hidden" name="rota" value="@Model.Rota" />
         <input type="hidden" name="cidade" value="@Model.Cidade" />

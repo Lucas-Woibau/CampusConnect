@@ -37,18 +37,14 @@
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Obter os dados do ViewBag
         var instituicaoCounts = JSON.parse('@Html.Raw(ViewBag.UsersInst)');
-        console.log(instituicaoCounts); // Verifique os dados
+        console.log(instituicaoCounts); 
 
-        // Ordenar os dados em ordem decrescente de quantidade
         instituicaoCounts.sort((a, b) => b.Count - a.Count);
 
-        // Preparar os dados para o gráfico
         var labels = instituicaoCounts.map(x => x.Instituicao);
         var data = instituicaoCounts.map(x => x.Count);
 
-        // Definir cores fixas para instituições conhecidas
         var fixedColors = {
             'UNESC': '#0000FF', // Azul
             'CASTELO BRANCO': '#00FF00', // Verde
@@ -56,17 +52,15 @@
             'SENAI': '#FFEB00' // Amarelo
         };
 
-        // Função para gerar uma cor aleatória
         function generateRandomColor() {
             return '#' + Math.floor(Math.random() * 16777215).toString(16);
         }
 
-        // Mapear instituições para cores
         var backgroundColors = instituicaoCounts.map(x => {
             if (fixedColors[x.Instituicao]) {
                 return fixedColors[x.Instituicao];
             } else {
-                return generateRandomColor(); // Gera cor aleatória para novas instituições
+                return generateRandomColor(); 
             }
         });
 
@@ -89,7 +83,7 @@
                         labels: {
                             color: 'white',
                             font: {
-                                size: 12 // Tamanho da fonte (opcional)
+                                size: 12 
                             }
                         }
                     },

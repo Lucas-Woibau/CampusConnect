@@ -11,7 +11,7 @@
 
 <div class="container mt-4 w-100 shadow-lg p-1 px-3">
 
-    <h2 class="text-center mb-5">Lista de Alunos</h2>
+    <h2 class="text-center mb-5">ALUNOS</h2>
     <form>
         <div class="input-group flex-nowrap mb-3">
             <div class="d-flex flex-column flex-md-row w-100">
@@ -46,7 +46,7 @@
                 </div>
                 <div class="d-flex ms-md-auto" role="search">
                     <input id="inputSearch" class="form-control me-2" type="search" name="search" asp-for="Search" placeholder="Pesquisar" aria-label="Search">
-                    <button class="btn btn-success" type="submit">Pesquisar</button>
+                    <button class="btn btn-success" type="submit">PESQUISAR</button>
                 </div>
             </div>
         </div>
@@ -55,12 +55,12 @@
     <table class="table table-striped-sm" style="width:100%">
         <thead class="shadow-sm">
             <tr>
-                <th>Nome</th>
-                <th>Instituição</th>
-                <th class="d-none d-md-table-cell">Cidade</th>
-                <th class="d-none d-md-table-cell">Curso</th>
-                <th class="d-none d-md-table-cell">Telefone</th>
-                <th class="d-none d-md-table-cell">Email</th>
+                <th>NOME</th>
+                <th>INSTITUIÇÃO</th>
+                <th class="d-none d-md-table-cell">CIDADE</th>
+                <th class="d-none d-md-table-cell">CURSO</th>
+                <th class="d-none d-md-table-cell">TELEFONE</th>
+                <th class="d-none d-md-table-cell">EMAIL</th>
                 <th style="width:5px"></th>
             </tr>
         </thead>
@@ -96,7 +96,7 @@
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Detalhes da conta:<br /> <strong>@user.Nome @user.Sobrenome</strong></h5>
+                                <h5 class="modal-title">DETALHES DA CONTA:<br /> <strong>@user.Nome @user.Sobrenome</strong></h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -105,7 +105,7 @@
                                     <div class="col-sm-8 d-flex align-items-center">
                                         <span class="me-2">@ViewBag.UserRoles[user.Id]</span>
                                         <button type="button" class="btn btn-link p-0 m-0" style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#roleModal-@user.Id">
-                                            Editar
+                                            ALTERAR
                                         </button>
                                     </div>
                                 </div>
@@ -151,7 +151,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">FECHAR</button>
                             </div>
                         </div>
                     </div>
@@ -161,7 +161,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Editar classe</h5>
+                                <h5 class="modal-title">EDITAR CLASSE</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                 </button>
                             </div>
@@ -172,11 +172,11 @@
                                     <select class="form-select mb-2" name="newRole" asp-items="@(new SelectList(ViewBag.AllRoles, "Value", "Text"))">
                                     </select>
 
-                                    <button type="submit" class="btn btn-primary">Salvar</button>
+                                    <button type="submit" class="btn btn-primary">ALTERAR</button>
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">FECHAR</button>
                             </div>
                         </div>
                     </div>
@@ -187,7 +187,7 @@
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Deletar Conta</h5>
+                                <h5 class="modal-title">DELETAR CONTA?</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -196,9 +196,9 @@
                             </div>
                             <div class="modal-footer">
                                 <a class="btn btn-danger" role="button" asp-controller="Users" asp-action="DeleteAccount" asp-route-id="@user.Id">
-                                    Deletar
+                                    DELETAR
                                 </a>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">FECHAR</button>
                             </div>
                         </div>
                     </div>
