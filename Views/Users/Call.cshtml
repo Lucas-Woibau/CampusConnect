@@ -64,7 +64,7 @@
         <table class="table table-striped-sm w-100">
             <thead class="shadow-sm">
                 <tr>
-                    <th>Nome</th>
+                    <th>NOME</th>
                     <th class="d-none d-md-table-cell">Instituição</th>
                     <th class="d-none d-md-table-cell">Cidade</th>
                     <th class="d-none d-md-table-cell">Telefone</th>
@@ -96,9 +96,9 @@
 
                         <td class="align-middle text-center">
                             <div class="form-check form-switch d-flex align-items-center justify-content-center">
-                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault_@user.Id" onchange="updateHiddenField(@i)">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault_@i" name="attendanceList[@i].Presente" value="true" />
                                 <input type="hidden" name="attendanceList[@i].Presente" value="false" />
-                                <input type="hidden" name="attendanceList[@i].Nome" value="@user.Nome" />
+                                <input type="hidden" name="attendanceList[@i].Nome" value="@user.Nome @user.Sobrenome" />
                                 <input type="hidden" name="attendanceList[@i].Instituicao" value="@user.Instituicao" />
                                 <input type="hidden" name="attendanceList[@i].Cidade" value="@user.Cidade" />
                                 <input type="hidden" name="attendanceList[@i].Curso" value="@user.Curso" />
@@ -110,8 +110,10 @@
                 }
             </tbody>
         </table>
+        <div class="d-flex justify-content-center align-items-center mb-2 w-100">
+            <button class="btn btn-success" type="submit">GERAR RELATÓRIO</button>
+        </div>
     </form>
-
 
 </div>
 

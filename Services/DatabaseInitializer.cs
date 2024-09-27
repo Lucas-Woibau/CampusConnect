@@ -31,7 +31,7 @@ namespace CampusConnect.Services
             var user = new ApplicationUser()
             {
                 Nome = "Administrador",
-                Sobrenome = "",
+                Sobrenome = "Supremo",
                 UserName = "TheAdmin@admin.com",
                 Email = "TheAdmin@admin.com",
             };
