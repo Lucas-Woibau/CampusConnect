@@ -1,0 +1,113 @@
+﻿@using CampusConnect.Models
+@using Microsoft.AspNetCore.Html
+@using Microsoft.AspNetCore.Identity
+@model SearchUsers
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    var instituicoes = ViewData["Instituicoes"] as List<string>;
+    var instituicoesPadrao = new[] { "UNESC", "CASTELO BRANCO", "IFES", "SENAI" };
+}
+
+<div class="container mt-4 w-100 shadow-lg p-1 px-3">
+    <h2 class="text-center mb-5">GERAR RELATÓRIO</h2>
+
+    <form>
+        <h6 class="text-center">FILTRAR POR:</h6>
+        <div class="input-group flex-nowrap mb-3">
+            <div class="d-flex justify-content-center w-100">
+                <div class="d-flex flex-column flex-md-row">
+                    <select class="form-select me-0 me-sm-2 mb-2 mb-sm-0" asp-for="Instituicao" onchange="this.form.submit()">
+                        <option value="">Todas as instituições</option>
+                        @foreach (var instituicao in instituicoesPadrao)
+                        {
+                            <option value="@instituicao">@instituicao</option>
+                        }
+                        @foreach (var instituicao in instituicoes)
+                        {
+                            @if (!instituicoesPadrao.Contains(instituicao))
+                            {
+                                <option value="@instituicao">@instituicao.ToUpper()</option>
+                            }
+                        }
+                    </select>
+                    <select class="form-select me-0 me-sm-2 mb-2 mb-sm-0" asp-for="Cidade" onchange="this.form.submit()">
+                        <option value="">Todas as cidades</option>
+                        <option value="PANCAS">PANCAS</option>
+                        <option value="LAGINHA">LAGINHA</option>
+                        <option value="VILA VERDE">VILA VERDE</option>
+                    </select>
+                    <select class="form-select me-0 me-sm-2 mb-2 mb-sm-0" asp-for="Rota" onchange="this.form.submit()">
+                        <option value="">Todas as rotas</option>
+                        <option value="UNESC">UNESC</option>
+                        <option value="CASTELO/CENTRO/IFES">CASTELO/CENTRO/IFES</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <form method="post" action="/Report/GenerateReportFull">
+        <input type="hidden" name="rota" value="@Model.Rota" />
+        <input type="hidden" name="cidade" value="@Model.Cidade" />
+        <input type="hidden" name="instituicao" value="@Model.Instituicao" />
+
+        <h6 class="text-center mb-3">DADOS PARA O RELATÓRIO:</h6>
+        <div class="mb-4 d-flex justify-content-center flex-wrap">
+            <div class="form-check me-3">
+                <input type="checkbox" class="form-check-input" id="nome" name="selectedFields.Nome" value="true" checked />
+                <label class="form-check-label" for="nome">Nome</label>
+            </div>
+            <div class="form-check me-3">
+                <input type="checkbox" class="form-check-input" id="instituicao" name="selectedFields.Instituicao" value="true" checked />
+                <label class="form-check-label" for="instituicao">Instituição</label>
+            </div>
+            <div class="form-check me-3">
+                <input type="checkbox" class="form-check-input" id="curso" name="selectedFields.Curso" value="true" checked />
+                <label class="form-check-label" for="curso">Curso</label>
+            </div>
+            <div class="form-check me-3">
+                <input type="checkbox" class="form-check-input" id="telefone" name="selectedFields.Telefone" value="true" checked />
+                <label class="form-check-label" for="telefone">Telefone</label>
+            </div>
+            <div class="form-check me-3">
+                <input type="checkbox" class="form-check-input" id="email" name="selectedFields.Email" value="true" checked />
+                <label class="form-check-label" for="email">Email</label>
+            </div>
+            <div class="form-check me-3">
+                <input type="checkbox" class="form-check-input" id="matricula" name="selectedFields.Matricula" value="true" checked />
+                <label class="form-check-label" for="matricula">Matrícula</label>
+            </div>
+            <div class="form-check me-3">
+                <input type="checkbox" class="form-check-input" id="periodo" name="selectedFields.Periodo" value="true" checked />
+                <label class="form-check-label" for="periodo">Período</label>
+            </div>
+            <div class="form-check me-3">
+                <input type="checkbox" class="form-check-input" id="cidade" name="selectedFields.Cidade" value="true" checked />
+                <label class="form-check-label" for="cidade">Cidade</label>
+            </div>
+            <div class="form-check me-3">
+                <input type="checkbox" class="form-check-input" id="rota" name="selectedFields.Rota" value="true" checked />
+                <label class="form-check-label" for="rota">Rota</label>
+            </div>
+        </div>
+
+        @for (int i = 0; i < ViewBag.Users.Count; i++)
+        {
+            var user = ViewBag.Users[i];
+            <input type="hidden" name="attendanceList[@i].Nome" value="@user.Nome @user.Sobrenome" />
+            <input type="hidden" name="attendanceList[@i].Instituicao" value="@user.Instituicao" />
+            <input type="hidden" name="attendanceList[@i].Cidade" value="@user.Cidade" />
+            <input type="hidden" name="attendanceList[@i].Curso" value="@user.Curso" />
+            <input type="hidden" name="attendanceList[@i].Telefone" value="@user.PhoneNumber" />
+            <input type="hidden" name="attendanceList[@i].Email" value="@user.Email" />
+            <input type="hidden" name="attendanceList[@i].Rota" value="@user.Rota" />
+            <input type="hidden" name="attendanceList[@i].Matricula" value="@user.Matricula" />
+            <input type="hidden" name="attendanceList[@i].Periodo" value="@user.Periodo" />
+        }
+
+        <div class="d-flex justify-content-center align-items-center mb-2 w-100">
+            <button class="btn btn-success" type="submit">GERAR RELATÓRIO</button>
+        </div>
+    </form>
+</div>

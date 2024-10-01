@@ -23,14 +23,13 @@
                         {
                             <option value="@instituicao">@instituicao</option>
                         }
-
                         @foreach (var instituicao in instituicoes)
                         {
                             @if (!instituicoesPadrao.Contains(instituicao))
                             {
                                 <option value="@instituicao">@instituicao.ToUpper()</option>
                             }
-                        }
+                        }                      
                     </select>
                     <select class="form-select me-0 me-sm-2 mb-2 mb-sm-0" asp-for="Cidade" onchange="this.form.submit()">
                         <option value="">Todas as cidades</option>
@@ -232,7 +231,7 @@
                 string active = "";
                 if (i == ViewBag.PageIndex) active = "active";
                 <li class="page-item @active">
-                    <a class="page-link" asp-route-pageIndex="@i">@i</a>
+                    <a class="page-link" asp-route-pageIndex="@i" asp-route-instituicao="@Model.Instituicao" asp-route-cidade="@Model.Cidade" asp-route-rota="@Model.Rota">@i</a>
                 </li>
             }
         </ul>

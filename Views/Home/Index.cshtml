@@ -14,8 +14,8 @@
                 <div class="container-fluid mt-4 shadow-lg">
                     <h5 class="mb-0">Total de alunos: <strong>@ViewBag.TotalUsers</strong></h5>
                     <div class="d-flex justify-content-center">
-                        <div class="chart-wrapper w-100" style="max-width: 800px;">                            
-                            <canvas id="instituicaoChart" class="w-100" a></canvas>
+                        <div class="chart-wrapper w-100">                            
+                            <canvas id="instituicaoChart" class="w-100"></canvas>
                         </div>
                     </div>
                 </div>
@@ -25,10 +25,10 @@
                 <img src="~/Images/LOGO.png" alt="Campus Connect" class="img-fluid mb-4" />
                 <div class="navbar d-flex justify-content-center">
                     <div class="nav-item me-3">
-                        <a class="btn btn-primary px-4 py-2" asp-area="" asp-controller="Account" asp-action="Register" style="font-size: 1.2rem;">Registrar</a>
+                        <a class="btn btn-primary px-4 py-2" asp-area="" asp-controller="Account" asp-action="Register" style="font-size: 1.2rem;">REGISTRAR</a>
                     </div>
                     <div class="nav-item">
-                        <a class="btn btn-success px-4 py-2" asp-area="" asp-controller="Account" asp-action="Login" style="font-size: 1.2rem;">Entrar</a>
+                        <a class="btn btn-success px-4 py-2" asp-area="" asp-controller="Account" asp-action="Login" style="font-size: 1.2rem;">ENTRAR</a>
                     </div>
                 </div>
             }
@@ -67,6 +67,7 @@
         var ctx = document.getElementById('instituicaoChart').getContext('2d');
         var myPieChart = new Chart(ctx, {
             type: 'pie',
+            position: 'right',
             data: {
                 labels: labels,
                 datasets: [{
@@ -79,11 +80,11 @@
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        position: 'left',
+                        position: 'bottom',
                         labels: {
                             color: 'white',
                             font: {
-                                size: 12 
+                                size: 15
                             }
                         }
                     },

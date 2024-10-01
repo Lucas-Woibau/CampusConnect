@@ -150,7 +150,48 @@ namespace CampusConnect.Controllers
             return RedirectToAction("Index", "Users", new { id });
         }
 
-        public async Task<IActionResult> Call(string? rota, string? cidade, string? instituicao)
+        public IActionResult Call(string? rota, string? cidade, string? instituicao)
+        {
+            IQueryable<ApplicationUser> query = _userManager.Users;
+
+            if (rota != null && rota.Length > 0)
+            {
+                query = query.Where(p => p.Rota.Contains(rota));
+            }
+
+            if (cidade != null && cidade.Length > 0)
+            {
+                query = query.Where(p => p.Cidade.Contains(cidade));
+            }
+
+            if (instituicao != null && instituicao.Length > 0)
+            {
+                query = query.Where(p => p.Instituicao.Contains(instituicao));
+            }
+
+            var users = query.ToList();
+
+            ViewBag.Users = users;
+
+            var SearchUsers = new SearchUsers()
+            {
+                Rota = rota,
+                Cidade = cidade,
+                Instituicao = instituicao,
+            };
+
+            var todasInstituicoes = _userManager.Users.Select(u => u.Instituicao).Distinct().ToList();
+            var todasAsRotas = _userManager.Users.Select(u => u.Rota).Distinct().ToList();
+            var todasAsCidades = _userManager.Users.Select(u => u.Cidade).Distinct().ToList();
+
+            ViewData["Instituicoes"] = todasInstituicoes;
+            ViewData["Rotas"] = todasAsRotas;
+            ViewData["Cidades"] = todasAsCidades;
+
+            return View(SearchUsers);
+        }
+
+        public IActionResult FullReport(string? rota, string? cidade, string? instituicao)
         {
             IQueryable<ApplicationUser> query = _userManager.Users;
 

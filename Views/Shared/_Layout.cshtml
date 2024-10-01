@@ -34,11 +34,12 @@
                                     @(appUser!.Nome + " (Admin)")
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-item" asp-area="" asp-controller="Users" asp-action="Index">Alunos</a></li>
-                                    <li><a class="dropdown-item" asp-area="" asp-controller="Users" asp-action="Call">Chamada</a></li>
-                                    <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Profile">Perfil</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Users" asp-action="Index">LISTA DE ALUNOS</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Users" asp-action="Call">FAZER CHAMADA</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Users" asp-action="FullReport">GERAR RELATÓRIO</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Profile">MEU PERFIL</a></li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Sair</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">SAIR</a></li>
                                 </ul>
                             </div>
                         }
@@ -49,16 +50,16 @@
                                     @(appUser!.Nome)
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Profile">Perfil</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Profile">MEU PERFIL</a></li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Sair</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">SAIR</a></li>
                                 </ul>
                             </div>
                         }
                         else
                         {
                             <ul class="navbar-nav d-flex align-items-center">
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Sair</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">SAIR</a></li>
                             </ul>
                         }
                     }
@@ -66,10 +67,10 @@
                     {
                         <div class="navbar d-flex">
                             <div class="nav-item me-2">
-                                <a class="btn btn-primary" asp-area="" asp-controller="Account" asp-action="Register">Registrar</a>
+                                <a class="btn btn-primary" asp-area="" asp-controller="Account" asp-action="Register">REGISTRAR</a>
                             </div>
                             <div class="nav-item">
-                                <a class="btn btn-success" asp-area="" asp-controller="Account" asp-action="Login">Entrar</a>
+                                <a class="btn btn-success" asp-area="" asp-controller="Account" asp-action="Login">ENTRAR</a>
                             </div>
                         </div>
                     }

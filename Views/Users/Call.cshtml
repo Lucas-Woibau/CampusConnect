@@ -17,12 +17,10 @@
                 <div class="d-flex flex-column flex-sm-row mb-2 mb-md-0">
                     <select class="form-select me-0 me-sm-2 mb-2 mb-sm-0" asp-for="Instituicao" onchange="this.form.submit()">
                         <option value="">Todas as instituições</option>
-
                         @foreach (var instituicao in instituicoesPadrao)
                         {
                             <option value="@instituicao">@instituicao</option>
                         }
-
                         @foreach (var instituicao in instituicoes)
                         {
                             @if (!instituicoesPadrao.Contains(instituicao))
@@ -31,12 +29,14 @@
                             }
                         }
                     </select>
+
                     <select class="form-select me-0 me-sm-2 mb-2 mb-sm-0" asp-for="Cidade" onchange="this.form.submit()">
                         <option value="">Todas as cidades</option>
                         <option value="PANCAS">PANCAS</option>
                         <option value="LAGINHA">LAGINHA</option>
                         <option value="VILA VERDE">VILA VERDE</option>
                     </select>
+
                     <select class="form-select me-0 me-sm-2 mb-2 mb-sm-0" asp-for="Rota" onchange="this.form.submit()">
                         <option value="">Todas as rotas</option>
                         <option value="UNESC">UNESC</option>
@@ -104,6 +104,9 @@
                                 <input type="hidden" name="attendanceList[@i].Curso" value="@user.Curso" />
                                 <input type="hidden" name="attendanceList[@i].Telefone" value="@user.PhoneNumber" />
                                 <input type="hidden" name="attendanceList[@i].Email" value="@user.Email" />
+                                <input type="hidden" name="attendanceList[@i].Rota" value="@user.Rota" />
+                                <input type="hidden" name="attendanceList[@i].Matricula" value="@user.Matricula" />
+                                <input type="hidden" name="attendanceList[@i].Periodo" value="@user.Periodo" />
                             </div>
                         </td>
                     </tr>
